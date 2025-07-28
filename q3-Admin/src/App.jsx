@@ -9,17 +9,29 @@ import Dashboard from "./pages/dashboard";
 
 import "./App.css";
 import Footer from "./components/shared/footer";
+import Customerlist from "./pages/customerlist";
+import Header from "./components/shared/header/Header";
+import Serviceproviderlist from "./pages/service-provider-list";
+import Towingrequestlist from "./pages/towing-request-list/indx";
+import Transactionhistorypages from "./pages/tansaction-history";
+
 
 function App() {
 
   return (
     <>
       <Sidebar />
-      <div className="g_mine">
-        <Topbar />
+      <Topbar />
+      <div className="g_mine das_sider">
+        
+        <Header/>
         {/* <Login/> */}
         {/* <Signup/> */}
-        <Dashboard />
+        {/* <Dashboard /> */}
+        {/* <Customerlist/> */}
+        {/* <Serviceproviderlist/> */}
+        {/* <Towingrequestlist/> */}
+        <Transactionhistorypages/>
       </div>
       <Footer />
     </>

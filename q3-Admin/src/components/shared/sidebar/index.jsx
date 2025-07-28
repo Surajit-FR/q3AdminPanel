@@ -27,12 +27,12 @@ export default function Sidebar() {
   useEffect(() => {
     const bodyElement = document.querySelector(".das_sider");
     const footerElement = document.querySelector(".d-footer");
-    if (isOpen) {
+    if (isOpen && bodyElement && footerElement) {
       bodyElement.style.marginLeft = "312px";
       footerElement.style.marginLeft = "312px";
     } else {
-      bodyElement.style.marginLeft = "80px";
-      footerElement.style.marginLeft = "80px";
+      bodyElement ? bodyElement.style.marginLeft = "80px" : null;
+      footerElement ? footerElement.style.marginLeft = "80px" : null;
     }
   }, [isOpen]);
   return (
