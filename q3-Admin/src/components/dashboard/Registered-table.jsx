@@ -6,7 +6,6 @@ const Registeredtable = () => {
       <div className="col-md-9">
         <div className="card h-100">
             <div className="card-body p-24">
-
               <div className="d-flex flex-wrap align-items-center gap-1 justify-content-between mb-16">
                 <ul className="nav border-gradient-tab nav-pills mb-0" id="pills-tab" role="tablist">
                   <li className="nav-item" role="presentation">
@@ -16,7 +15,7 @@ const Registeredtable = () => {
                     </button>
                   </li>
                   <li className="nav-item" role="presentation">
-                    <button className="nav-link d-flex align-items-center" id="pills-recent-leads-tab" data-bs-toggle="pill" data-bs-target="#pills-recent-leads" type="button" role="tab" aria-controls="pills-recent-leads" aria-selected="false" tabindex="-1">
+                    <button className="nav-link d-flex align-items-center" id="pills-recent-leads-tab" data-bs-toggle="pill" data-bs-target="#pills-recent-leads" type="button" role="tab" aria-controls="pills-recent-leads" aria-selected="false" tabIndex="-1">
                       Latest Subscribe 
                       <span className="text-sm fw-semibold py-6 px-12 bg-neutral-500 rounded-pill text-white line-height-1 ms-12 notification-alert">35</span>
                     </button>
@@ -29,7 +28,7 @@ const Registeredtable = () => {
               </div>
 
               <div className="tab-content" id="pills-tabContent">   
-                <div className="tab-pane fade show active" id="pills-to-do-list" role="tabpanel" aria-labelledby="pills-to-do-list-tab" tabindex="0">
+                <div className="tab-pane fade show active" id="pills-to-do-list" role="tabpanel" aria-labelledby="pills-to-do-list-tab" tabIndex="0">
                   <div className="table-responsive scroll-sm">
                     <table className="table bordered-table sm-table mb-0">
                       <thead>
@@ -125,7 +124,7 @@ const Registeredtable = () => {
                     </table>
                   </div>
                 </div>
-                <div className="tab-pane fade" id="pills-recent-leads" role="tabpanel" aria-labelledby="pills-recent-leads-tab" tabindex="0">
+                <div className="tab-pane fade" id="pills-recent-leads" role="tabpanel" aria-labelledby="pills-recent-leads-tab" tabIndex="0">
                   <div className="table-responsive scroll-sm">
                     <table className="table bordered-table sm-table mb-0">
                       <thead>

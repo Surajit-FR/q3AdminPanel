@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Rightsection = () => {
   return (
@@ -41,7 +42,7 @@ const Rightsection = () => {
                         <div className="d-flex justify-content-between gap-2">
                             <div className="form-check style-check d-flex align-items-start">
                                 <input className="form-check-input border border-neutral-300 mt-4" type="checkbox" value="" id="condition"/>
-                                <label className="form-check-label text-sm" for="condition">
+                                <label className="form-check-label text-sm" htmlFor="condition">
                                     By creating an account means you agree to the 
                                     <a href="javascript:void(0)" className="text-primary-600 fw-semibold">Terms & Conditions</a> and our 
                                     <a href="javascript:void(0)" className="text-primary-600 fw-semibold">Privacy Policy</a>
@@ -52,7 +53,7 @@ const Rightsection = () => {
                     </div>
                     <button type="submit" className="btn btn-primary text-sm btn-sm px-12 py-16 w-100 radius-12 mt-32"> Sign Up</button>
                     <div className="mt-32 text-center text-sm">
-                        <p className="mb-0">Already have an account? <a href="sign-in.html" className="text-primary-600 fw-semibold">Sign In</a></p>
+                        <p className="mb-0">Already have an account? <Link to="/login" className="text-primary-600 fw-semibold">Sign In</Link></p>
                     </div>
                     
                 </form>

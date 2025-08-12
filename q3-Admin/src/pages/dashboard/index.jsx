@@ -12,7 +12,7 @@ import Topcountries from '../../components/dashboard/Top-countries'
 const Dashboard = () => {
   return (
     <div className='das_sider'>
-      <Header/>
+      <Header heading="Dashboard" subHeading="AI"/>
       <Kpicard/>
       <div className='row mt-3'>
         <Linechart/>
