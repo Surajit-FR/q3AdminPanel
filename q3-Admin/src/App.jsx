@@ -9,7 +9,7 @@ function App() {
     <>
       <Sidebar />
       <Topbar />
-      <div className="g_mine das_sider">
+      <div className="g_mine das_sider" style={{background:'#ffffff'}}>
         <AllRoutes />
       </div>
       <Footer />

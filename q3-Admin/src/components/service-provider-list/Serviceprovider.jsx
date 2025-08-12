@@ -65,7 +65,7 @@ const Serviceprovider = () => {
             ></iconify-icon>
           </form>
         </div>
-        <a
+        {/* <a
           href="add-user.html"
           className="btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2"
         >
@@ -74,7 +74,7 @@ const Serviceprovider = () => {
             className="icon text-xl line-height-1"
           ></iconify-icon>
           Download CSV
-        </a>
+        </a> */}
       </div>
       <div className="card-body p-24">
         <div className="table-responsive scroll-sm">
