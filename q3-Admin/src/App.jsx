@@ -9,6 +9,7 @@ function App() {
     <>
       <Sidebar />
       <Topbar />
+      {/* <p style={{fontSize:"300px" ,textAlign: "center"}}> Log Out </p> */}
       <div className="g_mine das_sider" style={{background:'#ffffff'}}>
         <AllRoutes />
       </div>

@@ -15642,3 +15642,7 @@ td.fc-header-center {
   width: 90px;
   margin: 0 0 16px 0;
 }
+
+.dropdown-toggle::after {
+  content: none;
+}
