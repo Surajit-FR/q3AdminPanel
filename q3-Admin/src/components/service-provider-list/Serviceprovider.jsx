@@ -58,6 +58,7 @@ const Serviceprovider = () => {
               onSubmit={(e) => {
                 e.preventDefault();
               }}
+              onChange={(e) => setquery(e.target.value)}
             />
             <iconify-icon
               icon="ion:search-outline"

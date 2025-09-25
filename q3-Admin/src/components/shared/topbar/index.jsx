@@ -27,7 +27,7 @@ const Topbar = () => {
             </li> */}
         <div class="dropdown">
           <button
-            class="btn btn-outlined dropdown-toggle"
+            className="btn btn-outlined dropdown-toggle"
             type="button"
             id="dropdownMenuButton1"
             data-bs-toggle="dropdown"
