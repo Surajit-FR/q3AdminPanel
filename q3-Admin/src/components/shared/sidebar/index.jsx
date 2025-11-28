@@ -78,6 +78,13 @@ console.log({location});
             ></iconify-icon>
             <span className="nav-text">Customer List</span>
           </Link>
+          <Link to="/costings" className={`nav-item ${location.pathname === '/costings'? 'active': ''}`}>
+            <iconify-icon
+              icon="solar:user-check-bold-duotone"
+              class="menu-icon nav-icon"
+            ></iconify-icon>
+            <span className="nav-text">Costings</span>
+          </Link>
           <Link to="/service-provider-list" className={`nav-item ${location.pathname === '/service-provider-list'? 'active': ''}`}>
             <iconify-icon
               icon="solar:user-hand-up-bold-duotone"
