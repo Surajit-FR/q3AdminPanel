@@ -90,9 +90,9 @@ const Serviceprovider = () => {
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Status</th>
-                <th scope="col" className="text-center">
+                {/* <th scope="col" className="text-center">
                   Action
-                </th>
+                </th> */}
               </tr>
             </thead>
             <tbody>
@@ -133,42 +133,8 @@ const Serviceprovider = () => {
                         </span>
                       </td>
                       <td>{cust?.phone}</td>
-                      <td>{cust.isVerified ? "Verified" : "Not Verified"}</td>
-                      <td className="text-center">
-                        <div className="d-flex align-items-center gap-10 justify-content-center">
-                          <button
-                            type="button"
-                            className="bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
-                            onClick={(e)=>handleNavigation(e, cust?._id)}
-                          >
-                            <iconify-icon
-                              icon="majesticons:eye-line"
-                              className="icon text-xl"
-                            ></iconify-icon>
-                          </button>
-                          {/* {cust.isVerified ? (
-                            <button
-                              type="button"
-                              className="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
-                            >
-                              <iconify-icon
-                                icon="fluent:delete-24-regular"
-                                className="menu-icon"
-                              ></iconify-icon>
-                            </button>
-                          ) : (
-                            <button
-                              type="button"
-                              className="remove-item-btn bg-success-focus bg-hover-success-200 text-success-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
-                            >
-                              <iconify-icon
-                                icon="fluent:checkbox-checked-24-filled"
-                                className="menu-icon"
-                              ></iconify-icon>
-                            </button>
-                          )} */}
-                        </div>
-                      </td>
+                      <td>{cust.isVerified ? "Verified" : "Verified"}</td>
+                     
                     </tr>
                   ))
                 : null}

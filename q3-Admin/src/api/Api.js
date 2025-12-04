@@ -71,3 +71,14 @@ export const GETSINGLESERVICEREQUEST = (serviceProviderId) => {
    }
    return API.get(`/service/fetch-single-request?${queryString.toString()}`);
 }
+
+export const GETCOSTINGdETAILS = () => {
+   return API.get("/pricing-rule");
+}
+export const UPDATECOSTINGDETAIL = (priceRuleId, data) => API.put(`/pricing-rule/${priceRuleId}`, data);
+
+export const GETCOSTINGCONTACT = () => {
+   return API.get("/pricing-rule/custom-rule");
+}
+export const UPDATECOSTINGCONTACTDETAIL = (priceRuleId, data) => API.put(`/pricing-rule/custom-rule/${priceRuleId}`, data);
+

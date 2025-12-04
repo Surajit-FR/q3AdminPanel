@@ -5,7 +5,7 @@ const Topbar = () => {
   const navigate = useNavigate();
   const onLogOut = () => {
     localStorage.clear();
-    navigate("/");
+    navigate("/login");
   };
   return (
     <div className="topbar_1">
