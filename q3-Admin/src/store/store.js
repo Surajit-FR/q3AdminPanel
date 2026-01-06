@@ -4,6 +4,7 @@ import customerReducer from './reducers/customerReducer.js'
 import serviceProviderReducer from './reducers/serviceproviderreducer.js'
 import serviceRequestListSlice from './reducers/serviceReducer'
 import costingReducer from './reducers/costingReducer.js'
+import dashboardReducer from './reducers/dashboardReducer.js'
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     customer: customerReducer,
     serviceProvider: serviceProviderReducer,
     serviceRequest: serviceRequestListSlice,
-    costings: costingReducer
+    costings: costingReducer,
+    dashboard:dashboardReducer
     },
   })

@@ -99,7 +99,7 @@ const Customerlistpages = () => {
                         </div>
                       </td>
                       <td>
-                        {new Date(cust?.updatedAt).toLocaleDateString() ||
+                        {new Date(cust?.createdAt).toLocaleDateString() ||
                           "-- --"}
                       </td>
                       <td>

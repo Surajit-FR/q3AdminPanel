@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Pagination from "react-js-pagination";
 import { serviceListThunk } from "../../store/thunks/serviceRequestThink";
 
 const Towingrequest = () => {
   const dispatch = useDispatch();
+    const navigate = useNavigate();
+
   const { serviceRequestList } = useSelector((state) => state.serviceRequest);
   const [itemsPerpage, setperPage] = useState(10);
   const [page, setpage] = useState(1);
@@ -26,6 +28,11 @@ const Towingrequest = () => {
     );
   }, [dispatch, page, itemsPerpage, query]);
   console.log({ serviceRequestList });
+
+  const handleNavigation = (e, id) => {
+    e.preventDefault();
+    navigate(`/service-request-details/${id}`);
+  };
 
   return (
     <div className="card h-100 p-0 radius-12">
@@ -140,6 +147,7 @@ const Towingrequest = () => {
                           <button
                             type="button"
                             className="bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
+                            onClick={(e) => handleNavigation(e, cust?._id)}
                           >
                             <iconify-icon
                               icon="majesticons:eye-line"
@@ -164,26 +172,26 @@ const Towingrequest = () => {
           </table>
         </div>
         {/* {!query ? ( */}
-          <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24">
-            <span>
-              Showing{" "}
-              {(serviceRequestList?.pagination?.page - 1) * itemsPerpage + 1} to{" "}
-              {serviceRequestList?.pagination?.page * itemsPerpage >=
-              serviceRequestList?.pagination?.total
-                ? serviceRequestList?.pagination?.total
-                : serviceRequestList?.pagination?.page * itemsPerpage}{" "}
-              of {serviceRequestList?.pagination?.total} entries
-            </span>
-            <Pagination
-              activePage={page}
-              itemsCountPerPage={itemsPerpage}
-              totalItemsCount={serviceRequestList?.pagination?.total || 0}
-              pageRangeDisplayed={itemsPerpage}
-              onChange={handlePageChange}
-              itemClass="page-item"
-              linkClass="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-            />
-            {/* <ul className="pagination d-flex flex-wrap align-items-center gap-2 justify-content-center">
+        <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24">
+          <span>
+            Showing{" "}
+            {(serviceRequestList?.pagination?.page - 1) * itemsPerpage + 1} to{" "}
+            {serviceRequestList?.pagination?.page * itemsPerpage >=
+            serviceRequestList?.pagination?.total
+              ? serviceRequestList?.pagination?.total
+              : serviceRequestList?.pagination?.page * itemsPerpage}{" "}
+            of {serviceRequestList?.pagination?.total} entries
+          </span>
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={itemsPerpage}
+            totalItemsCount={serviceRequestList?.pagination?.total || 0}
+            pageRangeDisplayed={itemsPerpage}
+            onChange={handlePageChange}
+            itemClass="page-item"
+            linkClass="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
+          />
+          {/* <ul className="pagination d-flex flex-wrap align-items-center gap-2 justify-content-center">
             <li className="page-item">
               <a
                 className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
@@ -248,7 +256,7 @@ const Towingrequest = () => {
               </a>
             </li>
           </ul> */}
-          </div>
+        </div>
         {/* ) : null} */}
       </div>
     </div>

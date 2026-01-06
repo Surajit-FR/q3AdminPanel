@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { GETALLSERVICEPROVIDERS, GETSINGLESERVICEPROVIDER } from '../../api/Api'
+import { GETALLSERVICEPROVIDERS, GETSINGLESERVICEPROVIDER, VERIFYSERVICEPROVIDERSTATUS } from '../../api/Api'
 
 export const serviceProviderListThunk = createAsyncThunk(
     'serviceProvider/getAllCustomers',
@@ -25,6 +25,29 @@ export const serviceProviderDetailsThunk = createAsyncThunk(
     async (data, { rejectWithValue }) => {
         try {
             const response = await GETSINGLESERVICEPROVIDER(data)
+            
+            if (!response?.data?.status === 'success') {
+                return rejectWithValue({ message: 'Network error or unexpected issue', originalError: error?.response?.data?.message });  
+            }
+            console.log("response", response.data);
+            return response.data?.data
+        }
+        catch (error) {
+            // Handle network errors or other unexpected errors
+            if (error instanceof Error) {
+                return rejectWithValue({ message: 'Network error or unexpected issue', originalError: error?.response?.data?.message });
+            }
+        }
+
+    },
+)
+
+export const updateServiceProviderStatusThunk = createAsyncThunk(
+    'serviceProvider/updateServiceProviderStatus',
+    async (data, { rejectWithValue }) => {
+        try {
+            // const {serviceProviderId,data} = data
+            const response = await VERIFYSERVICEPROVIDERSTATUS(data.serviceProviderId,data.data)
             
             if (!response?.data?.status === 'success') {
                 return rejectWithValue({ message: 'Network error or unexpected issue', originalError: error?.response?.data?.message });  

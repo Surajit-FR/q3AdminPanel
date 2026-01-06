@@ -1,107 +1,162 @@
-import React from 'react'
+import React from "react";
 
-const Kpicard = () => {
+const Kpicard = ({ kpidata, navigateTo }) => {
   return (
     <div>
-      <div className="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
-        <div className="col">
-            <div className="card shadow-none border bg-gradient-start-1 h-100">
+      <div className="row  row-cols-lg-4 row-cols-sm-2 row-cols-1 gy-4">
+        <div className="col" onClick={()=>navigateTo('/customer-list')}>
+          <div className="card shadow-none border bg-gradient-start-1 h-100">
             <div className="card-body p-20">
-                <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+              <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                 <div>
-                    <p className="fw-medium text-primary-light mb-1">Total Users</p>
-                    <h6 className="mb-0">20,000</h6>
+                  <p className="fw-medium text-primary-light mb-1">
+                    Total Customers
+                  </p>
+                  <h6 className="mb-0">{kpidata?.totalCustomer || 0}</h6>
                 </div>
                 <div className="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
-                    <iconify-icon icon="gridicons:multiple-users" className="text-white text-2xl mb-0"></iconify-icon>
+                  <iconify-icon
+                    icon="gridicons:multiple-users"
+                    className="text-white text-2xl mb-0"
+                  ></iconify-icon>
                 </div>
-                </div>
-                <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                <span className="d-inline-flex align-items-center gap-1 text-success-main"><iconify-icon icon="bxs:up-arrow" className="text-xs"></iconify-icon> +5000</span> 
+              </div>
+              {/* <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
+                <span className="d-inline-flex align-items-center gap-1 text-success-main">
+                  <iconify-icon
+                    icon="bxs:up-arrow"
+                    className="text-xs"
+                  ></iconify-icon>{" "}
+                  +5000
+                </span>
                 Last 30 days users
-                </p>
+              </p> */}
             </div>
-            </div>
+          </div>
         </div>
-        <div className="col">
-            <div className="card shadow-none border bg-gradient-start-2 h-100">
+        <div className="col" onClick={()=>navigateTo('/service-provider-list')}>
+          <div className="card shadow-none border bg-gradient-start-2 h-100">
             <div className="card-body p-20">
-                <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+              <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                 <div>
-                    <p className="fw-medium text-primary-light mb-1">Total Subscription</p>
-                    <h6 className="mb-0">15,000</h6>
+                  <p className="fw-medium text-primary-light mb-1">
+                    Total Service Providers
+                  </p>
+                  <h6 className="mb-0">{kpidata?.totalSps || 0}</h6>
                 </div>
                 <div className="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
-                    <iconify-icon icon="fa-solid:award" className="text-white text-2xl mb-0"></iconify-icon>
+                    <iconify-icon
+                    icon="fluent:people-20-filled"
+                    className="text-white text-2xl mb-0"
+                  ></iconify-icon>                  
                 </div>
-                </div>
-                <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                <span className="d-inline-flex align-items-center gap-1 text-danger-main"><iconify-icon icon="bxs:down-arrow" className="text-xs"></iconify-icon> -800</span> 
+              </div>
+              {/* <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
+                <span className="d-inline-flex align-items-center gap-1 text-danger-main">
+                  <iconify-icon
+                    icon="bxs:down-arrow"
+                    className="text-xs"
+                  ></iconify-icon>{" "}
+                  -800
+                </span>
                 Last 30 days subscription
-                </p>
+              </p> */}
             </div>
-            </div>
+          </div>
         </div>
-        <div className="col">
-            <div className="card shadow-none border bg-gradient-start-3 h-100">
+        <div className="col"  onClick={()=>navigateTo('/service-request-list')}>
+          <div className="card shadow-none border bg-gradient-start-3 h-100">
             <div className="card-body p-20">
-                <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+              <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                 <div>
-                    <p className="fw-medium text-primary-light mb-1">Total Free Users</p>
-                    <h6 className="mb-0">5,000</h6>
+                  <p className="fw-medium text-primary-light mb-1">
+                    Total Services
+                  </p>
+                  <h6 className="mb-0">{kpidata?.totalServices || 0}</h6>
                 </div>
                 <div className="w-50-px h-50-px bg-info rounded-circle d-flex justify-content-center align-items-center">
-                    <iconify-icon icon="fluent:people-20-filled" className="text-white text-2xl mb-0"></iconify-icon>
+                 <iconify-icon
+                    icon="fa-solid:award"
+                    className="text-white text-2xl mb-0"
+                  ></iconify-icon>
                 </div>
-                </div>
-                <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                <span className="d-inline-flex align-items-center gap-1 text-success-main"><iconify-icon icon="bxs:up-arrow" className="text-xs"></iconify-icon> +200</span> 
+              </div>
+              {/* <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
+                <span className="d-inline-flex align-items-center gap-1 text-success-main">
+                  <iconify-icon
+                    icon="bxs:up-arrow"
+                    className="text-xs"
+                  ></iconify-icon>{" "}
+                  +200
+                </span>
                 Last 30 days users
-                </p>
+              </p> */}
             </div>
-            </div>
+          </div>
         </div>
-        <div className="col">
-            <div className="card shadow-none border bg-gradient-start-4 h-100">
+        <div className="col" onClick={()=>navigateTo('/service-provider-list')}>
+          <div className="card shadow-none border bg-gradient-start-4 h-100">
             <div className="card-body p-20">
-                <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+              <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                 <div>
-                    <p className="fw-medium text-primary-light mb-1">Total Income</p>
-                    <h6 className="mb-0">$42,000</h6>
+                  <p className="fw-medium text-primary-light mb-1">
+                    Total Online Service Providers
+                  </p>
+                  <h6 className="mb-0">{kpidata?.totalActiveSps || 0}</h6>
                 </div>
                 <div className="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                    <iconify-icon icon="solar:wallet-bold" className="text-white text-2xl mb-0"></iconify-icon>
+                  <iconify-icon
+                    icon="solar:wallet-bold"
+                    className="text-white text-2xl mb-0"
+                  ></iconify-icon>
                 </div>
-                </div>
-                <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                <span className="d-inline-flex align-items-center gap-1 text-success-main"><iconify-icon icon="bxs:up-arrow" className="text-xs"></iconify-icon> +$20,000</span> 
+              </div>
+              {/* <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
+                <span className="d-inline-flex align-items-center gap-1 text-success-main">
+                  <iconify-icon
+                    icon="bxs:up-arrow"
+                    className="text-xs"
+                  ></iconify-icon>{" "}
+                  +$20,000
+                </span>
                 Last 30 days income
-                </p>
+              </p> */}
             </div>
-            </div>
+          </div>
         </div>
-        <div className="col">
-            <div className="card shadow-none border bg-gradient-start-5 h-100">
+        {/* <div className="col">
+          <div className="card shadow-none border bg-gradient-start-5 h-100">
             <div className="card-body p-20">
-                <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+              <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                 <div>
-                    <p className="fw-medium text-primary-light mb-1">Total Expense</p>
-                    <h6 className="mb-0">$30,000</h6>
+                  <p className="fw-medium text-primary-light mb-1">
+                    Total Expense
+                  </p>
+                  <h6 className="mb-0">$30,000</h6>
                 </div>
                 <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
-                    <iconify-icon icon="fa6-solid:file-invoice-dollar" className="text-white text-2xl mb-0"></iconify-icon>
+                  <iconify-icon
+                    icon="fa6-solid:file-invoice-dollar"
+                    className="text-white text-2xl mb-0"
+                  ></iconify-icon>
                 </div>
-                </div>
-                <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                <span className="d-inline-flex align-items-center gap-1 text-success-main"><iconify-icon icon="bxs:up-arrow" className="text-xs"></iconify-icon> +$5,000</span> 
+              </div>
+              <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
+                <span className="d-inline-flex align-items-center gap-1 text-success-main">
+                  <iconify-icon
+                    icon="bxs:up-arrow"
+                    className="text-xs"
+                  ></iconify-icon>{" "}
+                  +$5,000
+                </span>
                 Last 30 days expense
-                </p>
+              </p>
             </div>
-            </div>
-        </div>
-        </div>
+          </div>
+        </div> */}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Kpicard
+export default Kpicard;

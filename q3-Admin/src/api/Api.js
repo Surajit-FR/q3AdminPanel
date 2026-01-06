@@ -2,83 +2,94 @@ import axios from "axios";
 import { REACT_APP_BASE_URL } from "./apiconfig";
 import { setupInterceptors } from "./interceptors";
 
-export const API = axios.create({ baseURL: REACT_APP_BASE_URL, withCredentials: true });
+export const API = axios.create({
+  baseURL: REACT_APP_BASE_URL,
+  withCredentials: true,
+});
 
 setupInterceptors();
 
 export const LOGIN = (data) => API.post("/auth/signin", data);
 export const GETALLCUSTOMERS = (data) => {
-    // console.log(data?.data.page);
-    
-    const queryString = new URLSearchParams();
-    //     // Add categoryId only if it exists
-    if (data?.data.page) {
-        queryString.append('page', String(data?.data.page));
-    }
-    if (data?.data.limit) {
-        queryString.append('limit', String(data?.data.limit));
-    }
-    if (data?.data.query) {
-        queryString.append('query', String(data?.data.query));
-    }
-    return API.get(`/user/fetch-customers?${queryString.toString()}`);
-}
+  // console.log(data?.data.page);
+
+  const queryString = new URLSearchParams();
+  //     // Add categoryId only if it exists
+  if (data?.data.page) {
+    queryString.append("page", String(data?.data.page));
+  }
+  if (data?.data.limit) {
+    queryString.append("limit", String(data?.data.limit));
+  }
+  if (data?.data.query) {
+    queryString.append("query", String(data?.data.query));
+  }
+  return API.get(`/user/fetch-customers?${queryString.toString()}`);
+};
 export const GETALLSERVICEPROVIDERS = (data) => {
-    // console.log(data?.data.page);
-    
-    const queryString = new URLSearchParams();
-    //     // Add categoryId only if it exists
-    if (data?.data.page) {
-        queryString.append('page', String(data?.data.page));
-    }
-    if (data?.data.limit) {
-        queryString.append('limit', String(data?.data.limit));
-    }
-    if (data?.data.query) {
-        queryString.append('query', String(data?.data.query));
-    }
-    return API.get(`/user/fetch-poviders?${queryString.toString()}`);
-}
+  // console.log(data?.data.page);
+
+  const queryString = new URLSearchParams();
+  //     // Add categoryId only if it exists
+  if (data?.data.page) {
+    queryString.append("page", String(data?.data.page));
+  }
+  if (data?.data.limit) {
+    queryString.append("limit", String(data?.data.limit));
+  }
+  if (data?.data.query) {
+    queryString.append("query", String(data?.data.query));
+  }
+  return API.get(`/user/fetch-poviders?${queryString.toString()}`);
+};
 
 export const GETSINGLESERVICEPROVIDER = (serviceProviderId) => {
-    const queryString = new URLSearchParams();
-   if(serviceProviderId){
-    queryString.append('userId', String(serviceProviderId));
-   }
-   return API.get(`/user/fetch-single-user?${queryString.toString()}`);
-}
+  const queryString = new URLSearchParams();
+  if (serviceProviderId) {
+    queryString.append("userId", String(serviceProviderId));
+  }
+  return API.get(`/user/fetch-single-user?${queryString.toString()}`);
+};
 export const GETALLSERVICEEREQUESTS = (data) => {
-    // console.log(data?.data.page);
-    
-    const queryString = new URLSearchParams();
-    //     // Add categoryId only if it exists
-    if (data?.data.page) {
-        queryString.append('page', String(data?.data.page));
-    }
-    if (data?.data.limit) {
-        queryString.append('limit', String(data?.data.limit));
-    }
-    if (data?.data.query) {
-        queryString.append('query', String(data?.data.query));
-    }
-    return API.get(`/service/fetch-all-request?${queryString.toString()}`);
-}
+  // console.log(data?.data.page);
+
+  const queryString = new URLSearchParams();
+  //     // Add categoryId only if it exists
+  if (data?.data.page) {
+    queryString.append("page", String(data?.data.page));
+  }
+  if (data?.data.limit) {
+    queryString.append("limit", String(data?.data.limit));
+  }
+  if (data?.data.query) {
+    queryString.append("query", String(data?.data.query));
+  }
+  return API.get(`/service/fetch-all-request?${queryString.toString()}`);
+};
 
 export const GETSINGLESERVICEREQUEST = (serviceProviderId) => {
-    const queryString = new URLSearchParams();
-   if(serviceProviderId){
-    queryString.append('userId', String(serviceProviderId));
-   }
-   return API.get(`/service/fetch-single-request?${queryString.toString()}`);
-}
+  const queryString = new URLSearchParams();
+  if (serviceProviderId) {
+    queryString.append("serviceId", String(serviceProviderId));
+  }
+  return API.get(`/service/fetch-single-request?${queryString.toString()}`);
+};
 
 export const GETCOSTINGdETAILS = () => {
-   return API.get("/pricing-rule");
-}
-export const UPDATECOSTINGDETAIL = (priceRuleId, data) => API.put(`/pricing-rule/${priceRuleId}`, data);
+  return API.get("/pricing-rule");
+};
+export const UPDATECOSTINGDETAIL = (priceRuleId, data) =>
+  API.put(`/pricing-rule/${priceRuleId}`, data);
 
 export const GETCOSTINGCONTACT = () => {
-   return API.get("/pricing-rule/custom-rule");
-}
-export const UPDATECOSTINGCONTACTDETAIL = (priceRuleId, data) => API.put(`/pricing-rule/custom-rule/${priceRuleId}`, data);
+  return API.get("/pricing-rule/custom-rule");
+};
+export const UPDATECOSTINGCONTACTDETAIL = (priceRuleId, data) =>
+  API.put(`/pricing-rule/custom-rule/${priceRuleId}`, data);
 
+export const VERIFYSERVICEPROVIDERSTATUS = (serviceProviderId, data) =>
+  API.post(`/auth/verify-sp/${serviceProviderId}`, data);
+
+export const GETDASHBOARDKPIDATA = () => {
+  return API.get("/auth/get-card-value");
+};
