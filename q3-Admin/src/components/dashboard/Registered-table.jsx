@@ -97,7 +97,7 @@ const Registeredtable = ({
                     </tr>
                   </thead>
                   <tbody>
-                    {customerList && customerList.customers.length > 0 ? (
+                    {customerList && customerList.customers && customerList.customers.length > 0 ? (
                       customerList.customers.map((cus) => (
                         <tr key={cus?._id}>
                           <td>
@@ -158,7 +158,7 @@ const Registeredtable = ({
                     </tr>
                   </thead>
                   <tbody>
-                   {serviceProviderList && serviceProviderList.serviceProviders.length > 0 ? (
+                   {serviceProviderList && serviceProviderList.serviceProviders && serviceProviderList.serviceProviders.length > 0 ? (
                       serviceProviderList.serviceProviders.map((cus) => (
                         <tr key={cus?._id}>
                           <td>
