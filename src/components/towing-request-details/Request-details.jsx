@@ -97,7 +97,7 @@ const RequestDetails = ({ details }) => {
               </p>
               <p className="mb-1">
                 <strong>Phone: </strong>
-                {`${details?.customer_countryCode}  ${details?.sp_phoneNumber}`}
+                {`${details?.customer_countryCode || "--"}  ${details?.sp_phoneNumber || "--"}`}
               </p>
               <p className="mb-1">
                 <strong>Driving License: </strong>
