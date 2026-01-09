@@ -22,6 +22,14 @@ const RequestDetails = ({ details }) => {
       {details ? (
         <>
           <div className="row">
+            <div className="mb-5">
+            {details?.pickupLocation && (
+              <Map
+                userOrigin={details?.pickupLocation}
+                userDestination={details?.destinyLocation}
+              />
+            )}
+            </div>
             <div className="col-md-4">
               <p className="fw-bold mb-3 me-2 text-decoration-underline">
                 Customer Information
@@ -192,10 +200,6 @@ const RequestDetails = ({ details }) => {
               </div>
             )}
           </div>
-          {
-            details?.pickupLocation && 
-          <Map userOrigin={details?.pickupLocation} userDestination={details?.destinyLocation}/>
-          }
         </>
       ) : (
         <p>No data Found</p>

@@ -11,11 +11,21 @@ import {
 
 export default function CustomMap({userOrigin, userDestination}) {
   const position = { lat: 22.5693049, lng: 88.4340465 };
+  const [originSection,setOriginSection] = useState("");
+  const [destinationSection, setDestinationSection] = useState("")
+  useEffect(()=>{
+    if(userOrigin){
+      setOriginSection(userOrigin)
+    }
+    if(userDestination){
+      setDestinationSection(userDestination)
+    }
+  },[userOrigin,userDestination])
   return (
     <div className="h-440-px">
       <APIProvider apiKey={GOOGLE_API_KEY}>
         <Map defaultCenter={position} defaultZoom={5}>
-          <Directons origin={userOrigin} destination={userDestination} />
+          <Directons origin={originSection} destination={destinationSection} />
         </Map>
       </APIProvider>
     </div>
@@ -47,7 +57,7 @@ function Directons({origin,destination}) {
             directionsRenderer.setDirections(res)
             setRoutes(res.routes)
         })
-    },[directionsServices, directionsRenderer])
+    },[directionsServices, directionsRenderer,origin,destination])
 console.log(routes)
   return null;
 }
