@@ -192,7 +192,10 @@ const RequestDetails = ({ details }) => {
               </div>
             )}
           </div>
-          <Map />
+          {
+            details?.pickupLocation && 
+          <Map userOrigin={details?.pickupLocation} userDestination={details?.destinyLocation}/>
+          }
         </>
       ) : (
         <p>No data Found</p>
