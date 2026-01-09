@@ -54,7 +54,7 @@ console.log({location});
         <div className="sidebar-header">
           <a href="#" className="sidebar-logo">
             <img
-              src="assets/images/logo.png"
+              src="/assets/images/logo.png"
               alt="site logo"
               className="light-logo"
             />

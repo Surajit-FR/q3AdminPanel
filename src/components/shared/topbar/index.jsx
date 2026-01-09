@@ -35,7 +35,7 @@ const Topbar = () => {
           >
             <div className="d-flex align-items-center">
               <img
-                src={"assets/images/user.png"}
+                src={"/assets/images/user.png"}
                 alt=""
                 className="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden"
               />
