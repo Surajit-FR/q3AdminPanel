@@ -63,9 +63,9 @@ const Dashboard = () => {
       <Header heading="Dashboard" subHeading="AI" />
       <Kpicard kpidata={dashboardKPIData} navigateTo={customNavigation} />
       <div className="row mt-3">
-        <Linechart />
+        {/* <Linechart />
         <Barchart />
-        <Piechart />
+        <Piechart /> */}
       </div>
       <div className="row mt-3">
         <Registeredtable
@@ -79,7 +79,7 @@ const Dashboard = () => {
       </div>
 
       <div className="row mt-3">
-        <Topcountries />
+        {/* <Topcountries /> */}
       </div>
     </div>
   );
