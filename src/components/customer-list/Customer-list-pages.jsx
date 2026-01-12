@@ -84,9 +84,9 @@ const Customerlistpages = () => {
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Verified</th>
-                <th scope="col" className="text-center">
+                {/* <th scope="col" className="text-center">
                   Action
-                </th>
+                </th> */}
               </tr>
             </thead>
             <tbody>
@@ -127,7 +127,7 @@ const Customerlistpages = () => {
                       </td>
                       <td>{cust?.phone}</td>
                       <td>{cust.isVerified ? "Verified" : "Not Verified"}</td>
-                      <td className="text-center">
+                      {/* <td className="text-center">
                         <div className="d-flex align-items-center gap-10 justify-content-center">
                           <button
                             type="button"
@@ -138,7 +138,7 @@ const Customerlistpages = () => {
                               className="icon text-xl"
                             ></iconify-icon>
                           </button>
-                          {/* <button
+                          <button
                             type="button"
                             className="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
                           >
@@ -146,9 +146,9 @@ const Customerlistpages = () => {
                               icon="fluent:delete-24-regular"
                               className="menu-icon"
                             ></iconify-icon>
-                          </button> */}
+                          </button>
                         </div>
-                      </td>
+                      </td> */}
                     </tr>
                   ))
                 : null}
