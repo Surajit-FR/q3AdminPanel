@@ -6,7 +6,7 @@ import { serviceListThunk } from "../../store/thunks/serviceRequestThink";
 
 const Towingrequest = () => {
   const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { serviceRequestList } = useSelector((state) => state.serviceRequest);
   const [itemsPerpage, setperPage] = useState(10);
@@ -90,7 +90,7 @@ const Towingrequest = () => {
                 <th scope="col">Create Date</th>
                 <th scope="col">customer Name</th>
                 <th scope="col">Vehicle Type</th>
-                <th scope="col">Is Accepted</th>
+                <th scope="col">Status</th>
                 <th scope="col">Cost</th>
                 <th scope="col" className="text-center">
                   Action
@@ -135,7 +135,11 @@ const Towingrequest = () => {
                         </span>
                       </td>
                       <td>
-                        {cust?.isReqAccepted ? "Accepted" : "Not Accepted"}
+                        {cust?.serviceProgess.replace("Service", "").length > 10
+                          ? cust?.serviceProgess
+                              .replace("Service", "")
+                              .slice(0, 9)
+                          : cust?.serviceProgess.replace("Service", "")}
                       </td>
                       <td>
                         {cust.towing_cost
@@ -190,74 +194,8 @@ const Towingrequest = () => {
             onChange={handlePageChange}
             itemClass="page-item"
             linkClass="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-          />
-          {/* <ul className="pagination d-flex flex-wrap align-items-center gap-2 justify-content-center">
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-                href="javascript:void(0)"
-              >
-                <iconify-icon
-                  icon="ep:d-arrow-left"
-                  className=""
-                ></iconify-icon>
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md bg-primary-600 text-white"
-                href="javascript:void(0)"
-              >
-                1
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px"
-                href="javascript:void(0)"
-              >
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-                href="javascript:void(0)"
-              >
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-                href="javascript:void(0)"
-              >
-                4
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-                href="javascript:void(0)"
-              >
-                5
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-                href="javascript:void(0)"
-              >
-                {" "}
-                <iconify-icon
-                  icon="ep:d-arrow-right"
-                  className=""
-                ></iconify-icon>{" "}
-              </a>
-            </li>
-          </ul> */}
+          />          
         </div>
-        {/* ) : null} */}
       </div>
     </div>
   );

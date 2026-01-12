@@ -5,6 +5,7 @@ import serviceProviderReducer from './reducers/serviceproviderreducer.js'
 import serviceRequestListSlice from './reducers/serviceReducer'
 import costingReducer from './reducers/costingReducer.js'
 import dashboardReducer from './reducers/dashboardReducer.js'
+import transactionReducer from './reducers/transactionReducer.js'
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     serviceProvider: serviceProviderReducer,
     serviceRequest: serviceRequestListSlice,
     costings: costingReducer,
-    dashboard:dashboardReducer
+    dashboard:dashboardReducer,
+    transaction:transactionReducer
     },
   })

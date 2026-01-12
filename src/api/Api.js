@@ -93,3 +93,7 @@ export const VERIFYSERVICEPROVIDERSTATUS = (serviceProviderId, data) =>
 export const GETDASHBOARDKPIDATA = () => {
   return API.get("/auth/get-card-value");
 };
+
+export const GETTRANSACTIONDATA = () => {
+  return API.get("/service/fetch-transactions");
+};
