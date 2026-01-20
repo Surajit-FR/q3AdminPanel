@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { GETDASHBOARDKPIDATA } from "../../api/Api";
+import { GETDASHBOARDKPIDATA, GETDASHBOARDPERFORMERDATA } from "../../api/Api";
 
 export const dashboardKPIDataThunk = createAsyncThunk(
   "dashboard/getKPIData",
@@ -25,3 +25,28 @@ export const dashboardKPIDataThunk = createAsyncThunk(
     }
   }
 );
+
+export const dashboardPerformerDataThunk = createAsyncThunk(
+  "dashboard/getPerformerData",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await GETDASHBOARDPERFORMERDATA();
+      if (!response?.data?.status === "success") {
+        return rejectWithValue({
+          message: "Network error or unexpected issue",
+          originalError: error?.response?.data?.message,
+        });
+      }     
+      return response.data;
+    } catch (error) {
+      // Handle network errors or other unexpected errors
+      if (error instanceof Error) {
+        return rejectWithValue({
+          message: "Network error or unexpected issue",
+          originalError: error?.response?.data?.message,
+        });
+      }
+    }
+  }
+);
+

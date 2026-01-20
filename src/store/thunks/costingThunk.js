@@ -41,6 +41,7 @@ export const editCostingThunk = createAsyncThunk(
             // Handle network errors or other unexpected errors
             if (error instanceof Error) {
                 return rejectWithValue({ message: 'Network error or unexpected issue', originalError: error?.response?.data?.message });
+                
             }
         }
 
@@ -54,6 +55,12 @@ export const costingContactThunk = createAsyncThunk(
             if (!response?.data?.status === 'success') {
                 return rejectWithValue({ message: 'Network error or unexpected issue', originalError: error?.response?.data?.message });
             }
+            showToast({
+                message: response?.data?.message || "Updated Successfully.",
+                type: "success",
+                durationTime: 3500,
+                position: "top-center",
+            });
             return response.data
         }
         catch (error) {

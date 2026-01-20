@@ -15,7 +15,7 @@ const RequestDetails = ({ details }) => {
     setSelectedImage(null);
     setModalTitle(null);
   };
-  console.log({ details });
+
 
   return (
     <>

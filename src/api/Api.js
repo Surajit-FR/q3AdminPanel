@@ -97,3 +97,14 @@ export const GETDASHBOARDKPIDATA = () => {
 export const GETTRANSACTIONDATA = () => {
   return API.get("/service/fetch-transactions");
 };
+
+
+export const BANUNBANCUSTOMER = (data) =>
+  API.post(`/auth/ban-customer`, data);
+
+export const BANUNBANSERVICEPROVIDER = (data) =>
+  API.post(`/auth/ban-sp`, data);
+
+export const GETDASHBOARDPERFORMERDATA = () => {
+  return API.get("/user/fetch-top-performing-poviders");
+};

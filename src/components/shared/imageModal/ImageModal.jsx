@@ -20,7 +20,7 @@ const ImagePreviewModal = ({ imageUrl, onClose, modalTitle }) => {
       tabIndex={-1}
       role="dialog"
       aria-labelledby="imagePreviewModalLabel"
-      aria-hidden="true"
+      // aria-hidden="true"
     >
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">

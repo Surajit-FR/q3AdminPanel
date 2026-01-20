@@ -58,6 +58,6 @@ function Directons({origin,destination}) {
             setRoutes(res.routes)
         })
     },[directionsServices, directionsRenderer,origin,destination])
-console.log(routes)
+// console.log(routes)
   return null;
 }

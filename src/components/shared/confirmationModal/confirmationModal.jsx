@@ -2,7 +2,8 @@ const ConfirmationModal = ({ modalId, modalText, onDelete }) => {
     return (
         <>
             <div id={modalId} className="modal fade" tabIndex={-1} role="dialog"
-                aria-hidden="true">
+                aria-hidden="true"
+                >
                 <div className="modal-dialog modal-sm">
                     <div className="modal-content">
                         <div className="modal-body p-4">

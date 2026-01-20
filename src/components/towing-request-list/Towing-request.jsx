@@ -1,17 +1,38 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Pagination from "react-js-pagination";
-import { serviceListThunk } from "../../store/thunks/serviceRequestThink";
+import {
+  serviceListThunk,
+  serviceListToDownloadThunk,
+} from "../../store/thunks/serviceRequestThink";
+import { CSVLink } from "react-csv";
 
+const headers = [
+  { label: "Customer Name", key: "customerName" },
+  { label: "Date Registered", key: "dateRegestered" },
+  { label: "Pickup Location", key: "pickupLocation" },
+  { label: "Destination", key: "destinyLocation" },
+  { label: "Distance (mi)", key: "totalDistance" },
+  { label: "Total Cost", key: "towing_cost" },
+  { label: "Service Code", key: "serviceCode" },
+  { label: "Sp Name", key: "sp_fullName" },
+  { label: "Sp Phone", key: "sp_phoneNumber" },
+  { label: "Payment Status", key: "paymentStatus" },
+];
 const Towingrequest = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { serviceRequestList } = useSelector((state) => state.serviceRequest);
+  const {
+    serviceRequestList,
+    getAllServiceLoading,
+    allServiceRequestsToDownload,
+  } = useSelector((state) => state.serviceRequest);
   const [itemsPerpage, setperPage] = useState(10);
   const [page, setpage] = useState(1);
   const [query, setquery] = useState("");
+  const csvref = useRef();
 
   const handlePageChange = (pageNum) => {
     setpage(pageNum);
@@ -24,10 +45,51 @@ const Towingrequest = () => {
           limit: itemsPerpage,
           query,
         },
-      })
+      }),
     );
   }, [dispatch, page, itemsPerpage, query]);
-  console.log({ serviceRequestList });
+  const handleCsvClick = useCallback(() => {
+    dispatch(
+      serviceListToDownloadThunk({
+        data: {
+          page: 1,
+          limit: 10000,
+          query: "",
+        },
+      }),
+    );
+  }, [dispatch]);
+  console.log({ allServiceRequestsToDownload });
+  const dataToExport = (data) => {
+    if (data?.data?.ServiceDetails && data?.data?.ServiceDetails.length > 0) {
+      return data?.data?.ServiceDetails.map((item) => ({
+        customerName: `${item?.customer_fullName}`,
+        dateRegestered:
+          new Date(item?.createdAt).toLocaleDateString() || "-- --",
+        pickupLocation: `${item?.pickupLocation}`,
+        destinyLocation: `${item?.destinyLocation}`,
+        totalDistance: `${item?.totalDistance}`,
+        serviceCode: `${item?.serviceCode}`,
+        sp_fullName: `${item?.sp_fullName}` || "-- --",
+        sp_phoneNumber: `${item?.sp_phoneNumber}` || "-- --",
+        towing_cost: `$${item?.towing_cost}` || "-- --",
+        paymentStatus: `${item?.isPaymentComplete ? "Paid" : "Due"}`,
+      }));
+    }
+    return [];
+  };
+
+   useEffect(() => {
+    if (
+      allServiceRequestsToDownload &&
+      allServiceRequestsToDownload.data &&
+      allServiceRequestsToDownload.data.ServiceDetails &&
+      allServiceRequestsToDownload.data.ServiceDetails.length > 0 &&
+      getAllServiceLoading === "success"
+    ) {
+      csvref.current?.link.click();
+    }
+  }, [allServiceRequestsToDownload, getAllServiceLoading]);
 
   const handleNavigation = (e, id) => {
     e.preventDefault();
@@ -68,16 +130,24 @@ const Towingrequest = () => {
             ></iconify-icon>
           </form>
         </div>
-        <a
-          href="add-user.html"
+        {getAllServiceLoading === "success" && (
+                  <CSVLink
+                    data={dataToExport(allServiceRequestsToDownload)}
+                    headers={headers}
+                    filename={"service-request-list.csv"}
+                    ref={csvref}
+                  />
+                )}
+        <button
           className="btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2"
+          onClick={() => handleCsvClick()}
         >
           <iconify-icon
             icon="ix:download"
             className="icon text-xl line-height-1"
           ></iconify-icon>
           Download CSV
-        </a>
+        </button>
       </div>
       <div className="card-body p-24">
         <div className="table-responsive scroll-sm">
@@ -194,7 +264,7 @@ const Towingrequest = () => {
             onChange={handlePageChange}
             itemClass="page-item"
             linkClass="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-          />          
+          />
         </div>
       </div>
     </div>

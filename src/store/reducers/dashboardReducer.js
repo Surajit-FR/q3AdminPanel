@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { dashboardKPIDataThunk } from "../thunks/dashboardThunk";
+import { dashboardKPIDataThunk, dashboardPerformerDataThunk } from "../thunks/dashboardThunk";
 
 const initialState = {
   dashboardKPIData: {},
+  dashboardPerformerData:{},
   loading: "idle",
   error: null,
+  performerLoading: "idle",
+  performerError: null,
+
 };
 
 
@@ -35,6 +39,26 @@ const dashboardReducer = createSlice({
             state.dashboardKPIData = {},
             state.loading = 'error',
             state.error = action.payload
+        })
+         builder.addCase(dashboardPerformerDataThunk.pending, (state, action) => {
+            // Add user to the state array
+            state.performerLoading = 'idle',
+            state.performerError = null
+        })
+        // Add reducers for additional action types here, and handle loading state as needed
+        builder.addCase(dashboardPerformerDataThunk.fulfilled, (state, action) => {
+            // Add user to the state array
+            console.log(action.payload);           
+            state.dashboardPerformerData = action.payload?.data,
+            state.performerLoading = 'success',
+            state.performerError = null
+        })
+        // Add reducers for additional action types here, and handle loading state as needed
+        builder.addCase(dashboardPerformerDataThunk.rejected, (state, action) => {
+            // Add user to the state array
+            state.dashboardPerformerData = {},
+            state.performerLoading = 'error',
+            state.performerError = action.payload
         })
     },
 })

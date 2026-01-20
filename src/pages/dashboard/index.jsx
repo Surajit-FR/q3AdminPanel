@@ -8,7 +8,7 @@ import Registeredtable from "../../components/dashboard/Registered-table";
 import Performercard from "../../components/dashboard/Performer-card";
 import Topcountries from "../../components/dashboard/Top-countries";
 import { useDispatch, useSelector } from "react-redux";
-import { dashboardKPIDataThunk } from "../../store/thunks/dashboardThunk";
+import { dashboardKPIDataThunk, dashboardPerformerDataThunk } from "../../store/thunks/dashboardThunk";
 import { useNavigate } from "react-router-dom";
 import { customerThunk } from "../../store/thunks/customerthunk";
 import { serviceProviderListThunk } from "../../store/thunks/serviceProviderThunk";
@@ -16,7 +16,7 @@ import { serviceProviderListThunk } from "../../store/thunks/serviceProviderThun
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { customerList } = useSelector((state) => state.customer);
-  const { dashboardKPIData } = useSelector((state) => state.dashboard);
+  const { dashboardKPIData, dashboardPerformerData } = useSelector((state) => state.dashboard);
   const { serviceProviderList } = useSelector((state) => state.serviceProvider);
 
   const navigation = useNavigate();
@@ -33,6 +33,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(dashboardKPIDataThunk());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(dashboardPerformerDataThunk());
   }, [dispatch]);
   useEffect(() => {
     dispatch(
@@ -75,7 +78,7 @@ const Dashboard = () => {
           customerList={customerList}
           serviceProviderList={serviceProviderList}
         />
-        <Performercard />
+        <Performercard performerData={dashboardPerformerData} />
       </div>
 
       <div className="row mt-3">

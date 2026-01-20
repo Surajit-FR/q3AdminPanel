@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  getAllServiceProviderCsvThunk,
+  serviceProviderBanUnbanThunk,
   serviceProviderDetailsThunk,
   serviceProviderListThunk,
   updateServiceProviderStatusThunk,
@@ -12,6 +14,11 @@ const initialState = {
   spStatusError: null,
   loading: "idle",
   error: null,
+  banLoading: 'idle',
+  banError: null,
+  allServiceProvidersToDownload: [],
+  getAllSpLoading: 'idle',
+  getAllSpError: null,
 };
 
 const serviceProviderReducer = createSlice({
@@ -73,7 +80,7 @@ const serviceProviderReducer = createSlice({
       updateServiceProviderStatusThunk.fulfilled,
       (state, action) => {
         // Add user to the state array
-          (state.spStatusLoading = "success"),
+        (state.spStatusLoading = "success"),
           (state.spStatusError = null);
       }
     );
@@ -82,10 +89,47 @@ const serviceProviderReducer = createSlice({
       updateServiceProviderStatusThunk.rejected,
       (state, action) => {
         // Add user to the state array
-          (state.spStatusLoading = "error"),
+        (state.spStatusLoading = "error"),
           (state.spStatusError = action.payload);
       }
     );
+    builder.addCase(serviceProviderBanUnbanThunk.pending, (state, action) => {
+      // Add user to the state array
+      state.banLoading = 'idle',
+        state.banError = null
+    })
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(serviceProviderBanUnbanThunk.fulfilled, (state, action) => {
+      // Add user to the state array
+      console.log(action.payload);
+      state.banLoading = 'success',
+        state.banError = null
+    })
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(serviceProviderBanUnbanThunk.rejected, (state, action) => {
+      // Add user to the state array
+      state.banLoading = 'error',
+        state.banError = action.payload
+    })
+    builder.addCase(getAllServiceProviderCsvThunk.pending, (state, action) => {
+      // Add user to the state array
+      state.getAllSpLoading = 'idle',
+        state.getAllSpError = null
+    })
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(getAllServiceProviderCsvThunk.fulfilled, (state, action) => {
+      // Add user to the state array
+      console.log(action.payload);
+      state.allServiceProvidersToDownload = action.payload
+      state.getAllSpLoading = 'success',
+        state.getAllSpError = null
+    })
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(getAllServiceProviderCsvThunk.rejected, (state, action) => {
+      // Add user to the state array
+      state.getAllSpLoading = 'error',
+        state.getAllSpError = action.payload
+    })
   },
 });
 

@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { serviceListThunk, serviceRequestDetailsThunk } from '../thunks/serviceRequestThink'
+import { serviceListThunk, serviceListToDownloadThunk, serviceRequestDetailsThunk } from '../thunks/serviceRequestThink'
 
 const initialState = {
     serviceRequestList: [],
     serviceRequestDetails: {},
     loading: 'idle',
     error: null,
+    allServiceRequestsToDownload: [],
+    getAllServiceLoading: 'idle',
+    getAllServiceError: null,
 }
 
 const serviceRequestListSlice = createSlice({
@@ -45,7 +48,7 @@ const serviceRequestListSlice = createSlice({
         // Add reducers for additional action types here, and handle loading state as needed
         builder.addCase(serviceRequestDetailsThunk.fulfilled, (state, action) => {
             // Add user to the state array        
-            console.log(action.payload);
+            // console.log(action.payload);
             state.serviceRequestDetails = action.payload,
                 state.loading = 'success',
                 state.error = null
@@ -56,6 +59,26 @@ const serviceRequestListSlice = createSlice({
             state.serviceRequestDetails = {},
                 state.loading = 'error',
                 state.error = action.payload
+        })
+        builder.addCase(serviceListToDownloadThunk.pending, (state, action) => {
+            // Add user to the state array
+            state.getAllServiceLoading = 'idle',
+                state.getAllServiceError = null
+        })
+        // Add reducers for additional action types here, and handle loading state as needed
+        builder.addCase(serviceListToDownloadThunk.fulfilled, (state, action) => {
+            // Add user to the state array
+            console.log(action.payload);
+            state.allServiceRequestsToDownload = action.payload,
+                state.getAllServiceLoading = 'success',
+                state.getAllServiceError = null
+        })
+        // Add reducers for additional action types here, and handle loading state as needed
+        builder.addCase(serviceListToDownloadThunk.rejected, (state, action) => {
+            // Add user to the state array
+            state.allServiceRequestsToDownload = [],
+                state.getAllServiceLoading = 'error',
+                state.getAllServiceError = action.payload
         })
     },
 })

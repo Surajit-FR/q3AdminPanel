@@ -12,7 +12,7 @@ const ServiceRequestDetails = () => {
   const { serviceRequestDetails } = useSelector(
     (state) => state.serviceRequest
   );
-  console.log({ serviceRequestDetails });
+  // console.log({ serviceRequestDetails });
 
   useEffect(() => {
     if (serviceId) {
