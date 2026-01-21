@@ -16,6 +16,7 @@ const serviceRequestListSlice = createSlice({
     initialState,
     reducers: {
         // standard reducer logic, with auto-generated action types per reducer
+            clearItems: () => initialState,
     },
     extraReducers: (builder) => {
         // Add reducers for additional action types here, and handle loading state as needed
@@ -83,5 +84,5 @@ const serviceRequestListSlice = createSlice({
     },
 })
 
-
+export const { clearItems } = serviceRequestListSlice.actions;
 export default serviceRequestListSlice.reducer;

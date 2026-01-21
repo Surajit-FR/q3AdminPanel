@@ -4,21 +4,23 @@ import Transactionhistory from "../../components/transaction-history/Transaction
 import Header from "../../components/shared/header/Header";
 import { transactionListThunk } from "../../store/thunks/transactionsThunk";
 
+
+
 const Transactionhistorypages = () => {
   const dispatch = useDispatch();
-  const { transactionDetails } = useSelector((state) => state.transaction);
+  const { transactionDetails, loading } = useSelector((state) => state.transaction);
 
   useEffect(() => {
     dispatch(transactionListThunk());
   }, [dispatch]);
 
-  console.log({ transactionDetails });
+  
 
   return (
     <div>
       <Header heading="Transactions" subHeading="list" />
 
-      <Transactionhistory transactionDetails={transactionDetails} />
+      <Transactionhistory transactionDetails={transactionDetails} loading={loading}/>
     </div>
   );
 };

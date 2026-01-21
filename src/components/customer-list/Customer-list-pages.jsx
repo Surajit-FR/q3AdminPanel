@@ -8,6 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Pagination from "react-js-pagination";
 import { CSVLink } from "react-csv";
 import ConfirmationModal from "../shared/confirmationModal/confirmationModal";
+import { clearItems } from "../../store/reducers/customerReducer";
 
 const headers = [
   { label: "Name", key: "name" },
@@ -90,6 +91,12 @@ const Customerlistpages = () => {
       csvref.current?.link.click();
     }
   }, [allCustomersToDownload, getAllCustLoading]);
+
+  useEffect(()=>{
+    return () => {
+      dispatch(clearItems())
+    };
+  },[dispatch])
 
   return (
     <>

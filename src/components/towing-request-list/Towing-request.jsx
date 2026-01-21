@@ -7,6 +7,7 @@ import {
   serviceListToDownloadThunk,
 } from "../../store/thunks/serviceRequestThink";
 import { CSVLink } from "react-csv";
+import { clearItems } from "../../store/reducers/serviceReducer";
 
 const headers = [
   { label: "Customer Name", key: "customerName" },
@@ -59,7 +60,7 @@ const Towingrequest = () => {
       }),
     );
   }, [dispatch]);
-  console.log({ allServiceRequestsToDownload });
+
   const dataToExport = (data) => {
     if (data?.data?.ServiceDetails && data?.data?.ServiceDetails.length > 0) {
       return data?.data?.ServiceDetails.map((item) => ({
@@ -79,7 +80,7 @@ const Towingrequest = () => {
     return [];
   };
 
-   useEffect(() => {
+  useEffect(() => {
     if (
       allServiceRequestsToDownload &&
       allServiceRequestsToDownload.data &&
@@ -96,6 +97,11 @@ const Towingrequest = () => {
     navigate(`/service-request-details/${id}`);
   };
 
+  useEffect(() => {
+    return () => {
+      dispatch(clearItems());
+    };
+  }, [dispatch]);
   return (
     <div className="card h-100 p-0 radius-12">
       <div className="card-header border-bottom bg-base py-16 px-24 d-flex align-items-center flex-wrap gap-3 justify-content-between">
@@ -131,13 +137,13 @@ const Towingrequest = () => {
           </form>
         </div>
         {getAllServiceLoading === "success" && (
-                  <CSVLink
-                    data={dataToExport(allServiceRequestsToDownload)}
-                    headers={headers}
-                    filename={"service-request-list.csv"}
-                    ref={csvref}
-                  />
-                )}
+          <CSVLink
+            data={dataToExport(allServiceRequestsToDownload)}
+            headers={headers}
+            filename={"service-request-list.csv"}
+            ref={csvref}
+          />
+        )}
         <button
           className="btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2"
           onClick={() => handleCsvClick()}

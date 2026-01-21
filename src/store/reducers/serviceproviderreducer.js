@@ -25,6 +25,7 @@ const serviceProviderReducer = createSlice({
   name: "serviceProvider",
   initialState,
   reducers: {
+    clearItems: () => initialState,
     // standard reducer logic, with auto-generated action types per reducer
   },
   extraReducers: (builder) => {
@@ -132,5 +133,5 @@ const serviceProviderReducer = createSlice({
     })
   },
 });
-
+export const { clearItems } = serviceProviderReducer.actions;
 export default serviceProviderReducer.reducer;

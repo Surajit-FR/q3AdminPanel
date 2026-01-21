@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../shared/confirmationModal/confirmationModal";
 import { CSVLink } from "react-csv";
+import { clearItems } from "../../store/reducers/serviceproviderreducer";
 
 const headers = [
   { label: "Name", key: "name" },
@@ -105,8 +106,12 @@ const Serviceprovider = () => {
     e.preventDefault();
     navigate(`/service-provider-details/${id}`);
   };
+useEffect(()=>{
+  return () => {
+    dispatch(clearItems())
+  };
+},[dispatch])
 
-  console.log({ serviceProviderList });
 
   return (
     <div className="card h-100 p-0 radius-12">

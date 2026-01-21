@@ -12,6 +12,7 @@ const transactionReducer = createSlice({
   initialState,
   reducers: {
     // standard reducer logic, with auto-generated action types per reducer
+    clearItems: () => initialState,
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed

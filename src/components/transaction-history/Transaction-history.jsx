@@ -1,20 +1,71 @@
-import React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { transactionListThunk } from "../../store/thunks/transactionsThunk";
+import { useDispatch } from "react-redux";
+import { CSVLink } from "react-csv";
 
-const Transactionhistory = ({ transactionDetails }) => {
+const headers = [
+  { label: "Transaction Id", key: "customerName" },
+  { label: "Paid By", key: "dateRegestered" },
+  { label: "Received By", key: "pickupLocation" },
+  { label: "Amount", key: "destinyLocation" },
+  { label: "Time", key: "totalDistance" },
+];
+const Transactionhistory = ({ transactionDetails, loading }) => {
+  const dispatch = useDispatch();
+  const csvref = useRef();
+  const [startDownload, setStartDownload] = useState(false);
+
+  const handleCsvClick = useCallback(() => {
+    setStartDownload(true);
+    dispatch(transactionListThunk());
+  }, [dispatch]);
+
+  const dataToExport = (data) => {
+    if (data && data.length > 0) {
+      return data?.map((item) => ({
+        paymentIntentId: `${item?.paymentIntentId}`,
+        paidAt: new Date(item?.paidAt).toLocaleDateString() || "-- --",
+        paidBy: `${item?.paidBy}`,
+        receivedBy: `${item?.receivedBy}`,
+        towing_cost: `$${item?.towing_cost}` || "-- --",
+      }));
+    }
+    return [];
+  };
+
+  useEffect(() => {
+    if (
+      transactionDetails &&
+      transactionDetails.length > 0 &&
+      loading === "success"
+    ) {
+      csvref.current?.link.click();
+      setStartDownload(false);
+    }
+  }, [transactionDetails, loading]);
+
   return (
     <div className="card h-100 p-0 radius-12">
       <div className="pxer">
         <div className="text-end">
-          <a
-            href="#"
+          {startDownload && (
+            <CSVLink
+              data={dataToExport(transactionDetails)}
+              headers={headers}
+              filename={"transactions-list.csv"}
+              ref={csvref}
+            />
+          )}
+          <button
             className="btn btn-primary text-sm btn-sm px-12 py-12 radius-8 gap-2 df"
+            onClick={() => handleCsvClick()}
           >
             <iconify-icon
               icon="ix:download"
               className="icon text-xl grt line-height-1"
             ></iconify-icon>
             Download CSV
-          </a>
+          </button>
         </div>
       </div>
 
