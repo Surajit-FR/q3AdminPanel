@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux";
 import { CSVLink } from "react-csv";
 
 const headers = [
-  { label: "Transaction Id", key: "customerName" },
-  { label: "Paid By", key: "dateRegestered" },
-  { label: "Received By", key: "pickupLocation" },
-  { label: "Amount", key: "destinyLocation" },
-  { label: "Time", key: "totalDistance" },
+  { label: "Transaction Id", key: "paymentIntentId" },
+  { label: "Paid By", key: "paidBy" },
+  { label: "Received By", key: "receivedBy" },
+  { label: "Amount", key: "towing_cost" },
+  { label: "Time", key: "paidAt" },
 ];
 const Transactionhistory = ({ transactionDetails, loading }) => {
   const dispatch = useDispatch();
