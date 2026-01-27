@@ -10,7 +10,7 @@ export const customerThunk = createAsyncThunk(
             if (!response?.data?.status === 'success') {
                 return rejectWithValue({ message: 'Network error or unexpected issue', originalError: error?.response?.data?.message });
             }
-            console.log("response==>", response?.data);
+            // console.log("response==>", response?.data);
 
             return response.data
         }

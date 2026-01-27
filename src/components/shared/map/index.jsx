@@ -13,6 +13,7 @@ export default function CustomMap({userOrigin, userDestination}) {
   const position = { lat: 22.5693049, lng: 88.4340465 };
   const [originSection,setOriginSection] = useState("");
   const [destinationSection, setDestinationSection] = useState("")
+  
   useEffect(()=>{
     if(userOrigin){
       setOriginSection(userOrigin)

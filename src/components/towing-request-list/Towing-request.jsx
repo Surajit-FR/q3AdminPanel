@@ -8,6 +8,8 @@ import {
 } from "../../store/thunks/serviceRequestThink";
 import { CSVLink } from "react-csv";
 import { clearItems } from "../../store/reducers/serviceReducer";
+import ConfirmaPayModal from "../service-provider-list/ConfirmPayModal";
+import { makePaymentThunk } from "../../store/thunks/transactionsThunk";
 
 const headers = [
   { label: "Customer Name", key: "customerName" },
@@ -30,6 +32,9 @@ const Towingrequest = () => {
     getAllServiceLoading,
     allServiceRequestsToDownload,
   } = useSelector((state) => state.serviceRequest);
+
+  const { paymentLoading } = useSelector((state) => state.transaction);
+
   const [itemsPerpage, setperPage] = useState(10);
   const [page, setpage] = useState(1);
   const [query, setquery] = useState("");
@@ -96,7 +101,10 @@ const Towingrequest = () => {
     e.preventDefault();
     navigate(`/service-request-details/${id}`);
   };
-
+  const handlePaymentToSp = (restData) => {
+    const payload = { ...restData };
+    dispatch(makePaymentThunk(payload));
+  };
   useEffect(() => {
     return () => {
       dispatch(clearItems());
@@ -165,6 +173,7 @@ const Towingrequest = () => {
                 </th>
                 <th scope="col">Create Date</th>
                 <th scope="col">customer Name</th>
+                <th scope="col">Service Provider Name</th>
                 <th scope="col">Vehicle Type</th>
                 <th scope="col">Status</th>
                 <th scope="col">Cost</th>
@@ -177,75 +186,101 @@ const Towingrequest = () => {
               {serviceRequestList?.ServiceDetails &&
               serviceRequestList?.ServiceDetails.length > 0
                 ? serviceRequestList?.ServiceDetails.map((cust, index) => (
-                    <tr key={cust?._id}>
-                      <td>
-                        <div className="d-flex align-items-center gap-10">
-                          {index + 1}
-                        </div>
-                      </td>
-                      <td>
-                        {new Date(cust?.createdAt).toLocaleDateString() ||
-                          "-- --"}
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <img
-                            src={
-                              cust?.customer_avatar
-                                ? cust?.customer_avatar
-                                : "assets/images/user-list/user-list1.png"
-                            }
-                            alt=""
-                            className="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden"
-                          />
-                          <div className="flex-grow-1">
-                            <span className="text-md mb-0 fw-normal text-secondary-light">
-                              {cust?.customer_fullName}
-                            </span>
+                    <>
+                      <ConfirmaPayModal
+                        modalId={`confirmPaySp-alert-modal-${index}`}
+                        modalText={`Fill Up The Details to pay ${cust?.sp_fullName}`}
+                        spId={cust?.serviceProviderId}
+                        serviceId={cust?._id}
+                        onDelete={handlePaymentToSp}
+                        isSuccess={paymentLoading}
+                      />
+                      <tr key={cust?._id}>
+                        <td>
+                          <div className="d-flex align-items-center gap-10">
+                            {index + 1}
                           </div>
-                        </div>
-                      </td>
-                      <td>
-                        <span className="text-md mb-0 fw-normal text-secondary-light">
-                          {cust.toeVehicle_type}
-                        </span>
-                      </td>
-                      <td>
-                        {cust?.serviceProgess.replace("Service", "").length > 10
-                          ? cust?.serviceProgess
-                              .replace("Service", "")
-                              .slice(0, 9)
-                          : cust?.serviceProgess.replace("Service", "")}
-                      </td>
-                      <td>
-                        {cust.towing_cost
-                          ? `$${cust.towing_cost.toFixed(2)}`
-                          : "-- --"}
-                      </td>
-                      <td className="text-center">
-                        <div className="d-flex align-items-center gap-10 justify-content-center">
-                          <button
-                            type="button"
-                            className="bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
-                            onClick={(e) => handleNavigation(e, cust?._id)}
-                          >
-                            <iconify-icon
-                              icon="majesticons:eye-line"
-                              className="icon text-xl"
-                            ></iconify-icon>
-                          </button>
-                          {/* <button
-                            type="button"
-                            className="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
-                          >
-                            <iconify-icon
-                              icon="fluent:delete-24-regular"
-                              className="menu-icon"
-                            ></iconify-icon>
-                          </button> */}
-                        </div>
-                      </td>
-                    </tr>
+                        </td>
+                        <td>
+                          {new Date(cust?.createdAt).toLocaleDateString() ||
+                            "-- --"}
+                        </td>
+                        <td>
+                          <div className="d-flex align-items-center">
+                            <img
+                              src={
+                                cust?.customer_avatar
+                                  ? cust?.customer_avatar
+                                  : "assets/images/user-list/user-list1.png"
+                              }
+                              alt=""
+                              className="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden"
+                            />
+                            <div className="flex-grow-1">
+                              <span className="text-md mb-0 fw-normal text-secondary-light">
+                                {cust?.customer_fullName}
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span className="text-md mb-0 fw-normal text-secondary-light">
+                            {cust?.sp_fullName ? cust?.sp_fullName : "-- --"}
+                          </span>
+                        </td>
+                        <td>
+                          <span className="text-md mb-0 fw-normal text-secondary-light">
+                            {cust.toeVehicle_type}
+                          </span>
+                        </td>
+                        <td>
+                          {cust?.serviceProgess.replace("Service", "").length >
+                          10
+                            ? cust?.serviceProgess
+                                .replace("Service", "")
+                                .slice(0, 9)
+                            : cust?.serviceProgess.replace("Service", "")}
+                        </td>
+                        <td>
+                          {cust.towing_cost
+                            ? `$${cust.towing_cost.toFixed(2)}`
+                            : "-- --"}
+                        </td>
+                        <td className="text-center">
+                          <div className="d-flex align-items-center gap-10 justify-content-center">
+                            <button
+                              type="button"
+                              className="bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
+                              onClick={(e) => handleNavigation(e, cust?._id)}
+                            >
+                              <iconify-icon
+                                icon="majesticons:eye-line"
+                                className="icon text-xl"
+                              ></iconify-icon>
+                            </button>
+                            {/* <button
+      type="button"
+      className="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
+    >
+      <iconify-icon
+        icon="fluent:delete-24-regular"
+        className="menu-icon"
+      ></iconify-icon>
+    </button> */}
+                            {cust?.sp_fullName && (
+                              <button
+                                type="button"
+                                className="remove-item-btn bg-success-focus bg-hover-success-200 text-success-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
+                                data-bs-toggle="modal"
+                                data-bs-target={`#confirmPaySp-alert-modal-${index}`}
+                              >
+                                Pay
+                              </button>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    </>
                   ))
                 : null}
             </tbody>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import useravatar from "../../assets/images/avatar/avatar-shape2.png";
 import ImagePreviewModal from "../shared/imageModal/ImageModal";
 import ConfirmationModal from "../shared/confirmationModal/confirmationModal";
+import { deleteUserThunk } from "../../store/thunks/authThunk";
 
 const PersonalInformation = ({ details, updateServiceProviderStatus }) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -33,6 +34,18 @@ const PersonalInformation = ({ details, updateServiceProviderStatus }) => {
               })
             }
           />
+          {/* <ConfirmationModal
+            modalId="spRemove-alert-modal"
+            modalText={`Want To Completely Remove The Service Provider?`}
+            onDelete={(e) => {
+              e.preventDefault();
+              dispatch(
+                deleteUserThunk({
+                  userId: details[0]?._id,
+                }),
+              );
+            }}
+          /> */}
           <div className="row">
             <div className="col-md-4">
               <p className="fw-bold mb-3 me-2 text-decoration-underline">
@@ -45,7 +58,7 @@ const PersonalInformation = ({ details, updateServiceProviderStatus }) => {
                 onClick={() =>
                   handleImageClick(
                     details[0]?.avatar ? details[0]?.avatar : useravatar,
-                    "Profile Picture"
+                    "Profile Picture",
                   )
                 }
               />
@@ -78,7 +91,7 @@ const PersonalInformation = ({ details, updateServiceProviderStatus }) => {
                 <strong>Created At: </strong>
                 {details[0]?.sp_details?.createdAt
                   ? new Date(
-                      details[0]?.sp_details?.createdAt
+                      details[0]?.sp_details?.createdAt,
                     ).toLocaleDateString()
                   : "-- --"}
               </p>
@@ -98,7 +111,7 @@ const PersonalInformation = ({ details, updateServiceProviderStatus }) => {
                 <strong>Updated At: </strong>
                 {details[0]?.sp_details?.updatedAt
                   ? new Date(
-                      details[0]?.sp_details?.updatedAt
+                      details[0]?.sp_details?.updatedAt,
                     ).toLocaleDateString()
                   : "-- --"}
               </p>
@@ -175,7 +188,7 @@ const PersonalInformation = ({ details, updateServiceProviderStatus }) => {
                         details[0]?.sp_details?.driverLicenseImage
                           ? details[0]?.sp_details?.driverLicenseImage
                           : useravatar,
-                        "Driving License"
+                        "Driving License",
                       )
                     }
                   />
@@ -196,7 +209,7 @@ const PersonalInformation = ({ details, updateServiceProviderStatus }) => {
                         details[0]?.sp_details?.insuranceImage
                           ? details[0]?.sp_details?.insuranceImage
                           : useravatar,
-                        "Insurance Policy"
+                        "Insurance Policy",
                       )
                     }
                   />
@@ -223,6 +236,16 @@ const PersonalInformation = ({ details, updateServiceProviderStatus }) => {
                     : "Verify Service Provider"}
                 </button>
               </div>
+              {/* <div className="row justify-content-center mt-3">
+                <button
+                  type="button"
+                  className={`col-md-4 fw-medium d-flex justify-content-center align-items-center text-base btn-outline-danger bg-danger-400 bg-hover-danger-400`}
+                  data-bs-toggle="modal"
+                  data-bs-target="#spRemove-alert-modal"
+                >
+                  Remove Service Provider
+                </button>
+              </div> */}
             </div>
           </div>
         </>

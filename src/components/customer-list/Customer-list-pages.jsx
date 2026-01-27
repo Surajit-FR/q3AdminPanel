@@ -9,6 +9,7 @@ import Pagination from "react-js-pagination";
 import { CSVLink } from "react-csv";
 import ConfirmationModal from "../shared/confirmationModal/confirmationModal";
 import { clearItems } from "../../store/reducers/customerReducer";
+import { deleteUserThunk } from "../../store/thunks/authThunk";
 
 const headers = [
   { label: "Name", key: "name" },
@@ -26,6 +27,8 @@ const Customerlistpages = () => {
     allCustomersToDownload,
     getAllCustLoading,
   } = useSelector((state) => state.customer);
+
+  const {isDeleateUserLoading} = useSelector(state=>state.auth)
   const [itemsPerpage, setperPage] = useState(10);
   const [page, setpage] = useState(1);
   const [query, setquery] = useState("");
@@ -73,6 +76,20 @@ const Customerlistpages = () => {
       );
     }
   }, [dispatch, page, itemsPerpage, query, banLoading]);
+
+  useEffect(() => {
+    if (isDeleateUserLoading === "success") {
+      dispatch(
+        customerThunk({
+          data: {
+            page,
+            limit: itemsPerpage,
+            query,
+          },
+        }),
+      );
+    }
+  }, [dispatch, page, itemsPerpage, query, isDeleateUserLoading]);
 
   const handleCsvClick = useCallback(() => {
     dispatch(
@@ -191,6 +208,19 @@ const Customerlistpages = () => {
                             );
                           }}
                         />
+                        <ConfirmationModal
+                          modalId={`deleteCustomer-alert-modal-${index}`}
+                          modalText={`Want To Completely remove The Customer (${cust?.fullName})?`}
+                          onDelete={(e) => {
+                            e.preventDefault();
+                           
+                            dispatch(
+                              deleteUserThunk({
+                                userId: cust?._id,
+                              }),
+                            );
+                          }}
+                        />
                         <td>
                           <div className="d-flex align-items-center gap-10">
                             {index + 1}
@@ -247,7 +277,7 @@ const Customerlistpages = () => {
                                 type="button"
                                 className="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
                                 data-bs-toggle="modal"
-                                data-bs-target={`#banCustomer-alert-modal-${index}`}
+                                data-bs-target={`#deleteCustomer-alert-modal-${index}`}
                               >
                                 <iconify-icon
                                   icon="fluent:delete-24-regular"
@@ -255,6 +285,17 @@ const Customerlistpages = () => {
                                 ></iconify-icon>
                               </button>
                             )}
+                             <button
+                                type="button"
+                                className="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
+                                data-bs-toggle="modal"
+                                data-bs-target={`#banCustomer-alert-modal-${index}`}
+                              >
+                              <iconify-icon
+                                  icon="fluent:record-stop-48-regular"
+                                  className="menu-icon"
+                                ></iconify-icon>
+                                </button>
                           </div>
                         </td>
                       </tr>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   serviceProviderDetailsThunk,
   updateServiceProviderStatusThunk,
@@ -11,10 +11,12 @@ import PersonalInformation from "../../components/service-provider-details/Perso
 const ServiceProviderDetails = () => {
   const { service_providerId } = useParams();
   const dispatch = useDispatch();
-  const { serviceProviderDetails, spStatusLoading } = useSelector(
-    (state) => state.serviceProvider
-  );
+  const navigate = useNavigate();
 
+  const { serviceProviderDetails, spStatusLoading } = useSelector(
+    (state) => state.serviceProvider,
+  );
+  const { isDeleateUserLoading } = useSelector((state) => state.auth);
   const updateServiceProviderStatus = (e, data) => {
     e.preventDefault();
     dispatch(updateServiceProviderStatusThunk(data));
@@ -33,6 +35,7 @@ const ServiceProviderDetails = () => {
     }
   }, [dispatch, service_providerId, spStatusLoading]);
 
+  
   return (
     <div>
       <Header heading="Service Providers" subHeading="Details" />

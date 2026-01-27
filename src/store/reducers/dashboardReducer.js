@@ -28,7 +28,7 @@ const dashboardReducer = createSlice({
         // Add reducers for additional action types here, and handle loading state as needed
         builder.addCase(dashboardKPIDataThunk.fulfilled, (state, action) => {
             // Add user to the state array
-            console.log(action.payload);           
+            // console.log(action.payload);           
             state.dashboardKPIData = action.payload?.data,
             state.loading = 'success',
             state.error = null
@@ -48,7 +48,7 @@ const dashboardReducer = createSlice({
         // Add reducers for additional action types here, and handle loading state as needed
         builder.addCase(dashboardPerformerDataThunk.fulfilled, (state, action) => {
             // Add user to the state array
-            console.log(action.payload);           
+            // console.log(action.payload);           
             state.dashboardPerformerData = action.payload?.data,
             state.performerLoading = 'success',
             state.performerError = null

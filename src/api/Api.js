@@ -108,3 +108,12 @@ export const BANUNBANSERVICEPROVIDER = (data) =>
 export const GETDASHBOARDPERFORMERDATA = () => {
   return API.get("/user/fetch-top-performing-poviders");
 };
+
+export const DELETEUSER = (data) =>
+  API.post(`/auth/delete-user`, data);
+
+export const GETSPLOCATIONDATA = (data) =>
+  API.post(`/location-session/fetch-sp-location`, data);
+
+export const GIVEPAYMENTSP = (data) =>
+  API.post(`/stripe/payout-sp`, data);

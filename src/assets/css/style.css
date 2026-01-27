@@ -15991,3 +15991,6 @@ td.fc-header-center {
         text-align:center
     }
 }
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}

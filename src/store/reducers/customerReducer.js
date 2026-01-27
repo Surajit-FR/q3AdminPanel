@@ -30,7 +30,7 @@ const customerReducer = createSlice({
         // Add reducers for additional action types here, and handle loading state as needed
         builder.addCase(customerThunk.fulfilled, (state, action) => {
             // Add user to the state array
-            console.log(action.payload);
+            // console.log(action.payload);
             state.customerList = action.payload?.data,
                 state.loading = 'success',
                 state.error = null

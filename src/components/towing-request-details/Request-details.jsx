@@ -2,7 +2,7 @@ import { useState } from "react";
 import useravatar from "../../assets/images/avatar/avatar-shape2.png";
 import ImagePreviewModal from "../shared/imageModal/ImageModal";
 import Map from "../shared/map";
-const RequestDetails = ({ details }) => {
+const RequestDetails = ({ details , spCurrentLocation}) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [modalTitle, setModalTitle] = useState(null);
 
@@ -25,7 +25,7 @@ const RequestDetails = ({ details }) => {
             <div className="mb-5">
             {details?.pickupLocation && (
               <Map
-                userOrigin={details?.pickupLocation}
+                userOrigin={spCurrentLocation && spCurrentLocation.length>0 ? {lat:spCurrentLocation[0]?.lat,lng: spCurrentLocation[0]?.lng }: details?.pickupLocation}
                 userDestination={details?.destinyLocation}
               />
             )}

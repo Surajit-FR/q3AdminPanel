@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { serviceListThunk, serviceListToDownloadThunk, serviceRequestDetailsThunk } from '../thunks/serviceRequestThink'
+import { getSpLocationThunk } from '../thunks/spLocationThunk'
 
 const initialState = {
     serviceRequestList: [],
@@ -9,6 +10,9 @@ const initialState = {
     allServiceRequestsToDownload: [],
     getAllServiceLoading: 'idle',
     getAllServiceError: null,
+    spCurrentLocation:[],
+    spLocationLoading: 'idle',
+    spLocationError: null
 }
 
 const serviceRequestListSlice = createSlice({
@@ -69,7 +73,7 @@ const serviceRequestListSlice = createSlice({
         // Add reducers for additional action types here, and handle loading state as needed
         builder.addCase(serviceListToDownloadThunk.fulfilled, (state, action) => {
             // Add user to the state array
-            console.log(action.payload);
+            // console.log(action.payload);
             state.allServiceRequestsToDownload = action.payload,
                 state.getAllServiceLoading = 'success',
                 state.getAllServiceError = null
@@ -80,6 +84,26 @@ const serviceRequestListSlice = createSlice({
             state.allServiceRequestsToDownload = [],
                 state.getAllServiceLoading = 'error',
                 state.getAllServiceError = action.payload
+        })
+           builder.addCase(getSpLocationThunk.pending, (state, action) => {
+            // Add user to the state array
+            state.spLocationLoading = 'idle',
+                state.spLocationError = null
+        })
+        // Add reducers for additional action types here, and handle loading state as needed
+        builder.addCase(getSpLocationThunk.fulfilled, (state, action) => {
+            // Add user to the state array
+            console.log(action.payload);
+            state.spCurrentLocation = action.payload?.data,
+                state.spLocationLoading = 'success',
+                state.spLocationError = null
+        })
+        // Add reducers for additional action types here, and handle loading state as needed
+        builder.addCase(getSpLocationThunk.rejected, (state, action) => {
+            // Add user to the state array
+            state.allServiceRequestsToDownload = [],
+                state.spLocationLoading = 'error',
+                state.spLocationError = action.payload
         })
     },
 })

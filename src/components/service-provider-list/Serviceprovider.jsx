@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../shared/confirmationModal/confirmationModal";
 import { CSVLink } from "react-csv";
 import { clearItems } from "../../store/reducers/serviceproviderreducer";
+import { deleteUserThunk } from "../../store/thunks/authThunk";
+import ConfirmaPayModal from "./ConfirmPayModal";
 
 const headers = [
   { label: "Name", key: "name" },
@@ -205,6 +207,19 @@ useEffect(()=>{
                           );
                         }}
                       />
+                        <ConfirmationModal
+                          modalId={`deleteSp-alert-modal-${index}`}
+                          modalText={`Want To Completely Remove The Service Provider (${cust?.fullName})?`}
+                          onDelete={(e) => {
+                            e.preventDefault();
+                            dispatch(
+                              deleteUserThunk({
+                                userId: cust?._id,
+                              }),
+                            );
+                          }}
+                        />
+                      
                       <td>
                         <div className="d-flex align-items-center gap-10">
                           {index + 1}
@@ -283,13 +298,30 @@ useEffect(()=>{
                               data-bs-toggle="modal"
                               data-bs-target={`#banSp-alert-modal-${index}`}
                             >
-                              <iconify-icon
+                              {/* <iconify-icon
                                 icon="fluent:delete-24-regular"
                                 className="menu-icon"
-                              ></iconify-icon>
+                              ></iconify-icon> */}
+                              <iconify-icon
+                                  icon="fluent:record-stop-48-regular"
+                                  className="menu-icon"
+                                ></iconify-icon>
                             </button>
                           )}
+                          <button
+                                type="button"
+                                className="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
+                                data-bs-toggle="modal"
+                                data-bs-target={`#deleteSp-alert-modal-${index}`}
+                              >
+                                <iconify-icon
+                                  icon="fluent:delete-24-regular"
+                                  className="menu-icon"
+                                ></iconify-icon>
+                              </button>
+                             
                         </div>
+                        
                       </td>
                     </tr>
                   ))

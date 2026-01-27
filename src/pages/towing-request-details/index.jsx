@@ -4,15 +4,18 @@ import Header from "../../components/shared/header/Header";
 import { useParams } from "react-router-dom";
 import { serviceRequestDetailsThunk } from "../../store/thunks/serviceRequestThink";
 import RequestDetails from "../../components/towing-request-details/Request-details";
+import { getSpLocationThunk } from "../../store/thunks/spLocationThunk";
 
 
 const ServiceRequestDetails = () => {
   const { serviceId } = useParams();
   const dispatch = useDispatch();
-  const { serviceRequestDetails } = useSelector(
+  const { serviceRequestDetails, spCurrentLocation } = useSelector(
     (state) => state.serviceRequest
   );
-  // console.log({ serviceRequestDetails });
+  //  const [spLocations, setSpLocations] = useState([]);
+  console.log({ spCurrentLocation });
+  console.log({ serviceRequestDetails });
 
   useEffect(() => {
     if (serviceId) {
@@ -25,11 +28,24 @@ const ServiceRequestDetails = () => {
   //       dispatch(serviceProviderDetailsThunk(service_providerId));
   //     }
   //   }, [dispatch, service_providerId, spStatusLoading]);
-
+  useEffect(() => {
+    
+      const intervalId = setInterval(() => {
+        if (serviceId && serviceRequestDetails?.isReqAccepted) {
+      // Use the functional form of setSeconds to get the latest state
+      dispatch(getSpLocationThunk({serviceId}));
+        }
+    }, 5000)
+      
+    
+    return () => {
+      clearInterval(intervalId);
+    }
+  }, [dispatch, serviceId, serviceRequestDetails]);
   return (
     <div>
       <Header heading="Service Request Details" subHeading="Details" />
-      <RequestDetails details={serviceRequestDetails} />
+      <RequestDetails details={serviceRequestDetails} spCurrentLocation={spCurrentLocation}/>
     </div>
   );
 };
