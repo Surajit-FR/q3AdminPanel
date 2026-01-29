@@ -193,7 +193,7 @@ const Towingrequest = () => {
                         spId={cust?.serviceProviderId}
                         serviceId={cust?._id}
                         onDelete={handlePaymentToSp}
-                        isSuccess={paymentLoading === 'success'}
+                        isSuccess={paymentLoading}
                       />
                       <tr key={cust?._id}>
                         <td>

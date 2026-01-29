@@ -12,6 +12,7 @@ import { dashboardKPIDataThunk, dashboardPerformerDataThunk } from "../../store/
 import { useNavigate } from "react-router-dom";
 import { customerThunk } from "../../store/thunks/customerthunk";
 import { serviceProviderListThunk } from "../../store/thunks/serviceProviderThunk";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,9 @@ const Dashboard = () => {
 
   return (
     <div className="das_sider">
+      <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
       <Header heading="Dashboard" subHeading="AI" />
       <Kpicard kpidata={dashboardKPIData} navigateTo={customNavigation} />
       <div className="row mt-3">
