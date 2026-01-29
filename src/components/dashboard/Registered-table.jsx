@@ -160,7 +160,9 @@ const Registeredtable = ({
                   <tbody>
                    {serviceProviderList && serviceProviderList.serviceProviders && serviceProviderList.serviceProviders.length > 0 ? (
                       serviceProviderList.serviceProviders.map((cus) => (
-                        <tr key={cus?._id}>
+                        <tr key={cus?._id}
+                          onClick={()=>navigateTo(`/service-provider-details/${cus?._id}`)}
+                        >
                           <td>
                             <div className="d-flex align-items-center">
                               <img

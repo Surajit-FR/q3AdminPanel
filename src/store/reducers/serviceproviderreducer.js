@@ -5,6 +5,7 @@ import {
   serviceProviderDetailsThunk,
   serviceProviderListThunk,
   updateServiceProviderStatusThunk,
+  getAllPayoutsToSPThunk,
 } from "../thunks/serviceProviderThunk";
 
 const initialState = {
@@ -19,6 +20,9 @@ const initialState = {
   allServiceProvidersToDownload: [],
   getAllSpLoading: 'idle',
   getAllSpError: null,
+  getAllPayoutsLoading: 'idle',
+  getAllPayotsError:null,
+  allPayOuts:[]
 };
 
 const serviceProviderReducer = createSlice({
@@ -120,7 +124,7 @@ const serviceProviderReducer = createSlice({
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(getAllServiceProviderCsvThunk.fulfilled, (state, action) => {
       // Add user to the state array
-      console.log(action.payload);
+      // console.log(action.payload);
       state.allServiceProvidersToDownload = action.payload
       state.getAllSpLoading = 'success',
         state.getAllSpError = null
@@ -130,6 +134,25 @@ const serviceProviderReducer = createSlice({
       // Add user to the state array
       state.getAllSpLoading = 'error',
         state.getAllSpError = action.payload
+    })
+    builder.addCase(getAllPayoutsToSPThunk.pending, (state, action) => {
+      // Add user to the state array
+      state.getAllPayoutsLoading = 'idle',
+        state.getAllPayotsError = null
+    })
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(getAllPayoutsToSPThunk.fulfilled, (state, action) => {
+      // Add user to the state array
+      console.log(action.payload);
+      state.allPayOuts = action.payload,
+      state.getAllPayoutsLoading = 'success',
+        state.getAllPayotsError = null
+    })
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(getAllPayoutsToSPThunk.rejected, (state, action) => {
+      // Add user to the state array
+      state.getAllPayoutsLoading = 'error',
+        state.getAllPayotsError = action.payload
     })
   },
 });

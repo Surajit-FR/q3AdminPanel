@@ -108,12 +108,11 @@ const Serviceprovider = () => {
     e.preventDefault();
     navigate(`/service-provider-details/${id}`);
   };
-useEffect(()=>{
-  return () => {
-    dispatch(clearItems())
-  };
-},[dispatch])
-
+  useEffect(() => {
+    return () => {
+      dispatch(clearItems());
+    };
+  }, [dispatch]);
 
   return (
     <div className="card h-100 p-0 radius-12">
@@ -207,19 +206,19 @@ useEffect(()=>{
                           );
                         }}
                       />
-                        <ConfirmationModal
-                          modalId={`deleteSp-alert-modal-${index}`}
-                          modalText={`Want To Completely Remove The Service Provider (${cust?.fullName})?`}
-                          onDelete={(e) => {
-                            e.preventDefault();
-                            dispatch(
-                              deleteUserThunk({
-                                userId: cust?._id,
-                              }),
-                            );
-                          }}
-                        />
-                      
+                      <ConfirmationModal
+                        modalId={`deleteSp-alert-modal-${index}`}
+                        modalText={`Want To Completely Remove The Service Provider (${cust?.fullName})?`}
+                        onDelete={(e) => {
+                          e.preventDefault();
+                          dispatch(
+                            deleteUserThunk({
+                              userId: cust?._id,
+                            }),
+                          );
+                        }}
+                      />
+
                       <td>
                         <div className="d-flex align-items-center gap-10">
                           {index + 1}
@@ -303,25 +302,23 @@ useEffect(()=>{
                                 className="menu-icon"
                               ></iconify-icon> */}
                               <iconify-icon
-                                  icon="fluent:record-stop-48-regular"
-                                  className="menu-icon"
-                                ></iconify-icon>
+                                icon="fluent:record-stop-48-regular"
+                                className="menu-icon"
+                              ></iconify-icon>
                             </button>
                           )}
                           <button
-                                type="button"
-                                className="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
-                                data-bs-toggle="modal"
-                                data-bs-target={`#deleteSp-alert-modal-${index}`}
-                              >
-                                <iconify-icon
-                                  icon="fluent:delete-24-regular"
-                                  className="menu-icon"
-                                ></iconify-icon>
-                              </button>
-                             
+                            type="button"
+                            className="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
+                            data-bs-toggle="modal"
+                            data-bs-target={`#deleteSp-alert-modal-${index}`}
+                          >
+                            <iconify-icon
+                              icon="fluent:delete-24-regular"
+                              className="menu-icon"
+                            ></iconify-icon>
+                          </button>
                         </div>
-                        
                       </td>
                     </tr>
                   ))

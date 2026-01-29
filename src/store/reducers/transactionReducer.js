@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { makePaymentThunk, transactionListThunk } from "../thunks/transactionsThunk";
+import { fetchTransationsSpWiseThunk, makePaymentThunk, transactionListThunk } from "../thunks/transactionsThunk";
 
 const initialState = {
   transactionDetails: {},
@@ -7,6 +7,9 @@ const initialState = {
   error: null,
   paymentLoading:'idle',
   paymentError: null,
+  spwiseTransactionLoading:'idle',
+  spwiseTransactionError: null,
+  spWiseTransactionData:[]
 };
 
 const transactionReducer = createSlice({
@@ -56,6 +59,26 @@ const transactionReducer = createSlice({
  
         (state.paymentLoading = "error"),
         (state.paymentError = action.payload);
+    });
+       // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(fetchTransationsSpWiseThunk.pending, (state, action) => {
+      // Add user to the state array
+      (state.spwiseTransactionLoading = "idle"), (state.spwiseTransactionError = null);
+    });
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(fetchTransationsSpWiseThunk.fulfilled, (state, action) => {
+      // Add user to the state array
+      console.log("payload====>",action.payload);
+      (state.spWiseTransactionData = action.payload?.data),
+        (state.spwiseTransactionLoading = "success"),
+        (state.spwiseTransactionError = null);
+    });
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(fetchTransationsSpWiseThunk.rejected, (state, action) => {
+      // Add user to the state array
+ 
+        (state.spwiseTransactionLoading = "error"),
+        (state.spwiseTransactionError = action.payload);
     });
   },
 });

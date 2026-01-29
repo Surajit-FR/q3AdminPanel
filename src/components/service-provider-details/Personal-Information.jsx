@@ -46,6 +46,24 @@ const PersonalInformation = ({ details, updateServiceProviderStatus }) => {
               );
             }}
           /> */}
+          <div className="col-md-12">
+              <div className="row justify-content-end mb-5">
+                <button
+                  type="button"
+                  className={`col-md-3 fw-medium d-flex justify-content-center align-items-center text-base 
+              ${
+                details[0]?.isVerified
+                  ? "btn-outline-danger bg-danger-400 bg-hover-danger-400"
+                  : " btn-outline-success bg-success-400 bg-hover-success-400"
+              }`}
+                  data-bs-toggle="modal"
+                  data-bs-target="#spStatus-alert-modal"
+                >
+                  {details[0]?.isVerified
+                    ? "Unverify Service Provider"
+                    : "Verify Service Provider"}
+                </button>
+              </div>
           <div className="row">
             <div className="col-md-4">
               <p className="fw-bold mb-3 me-2 text-decoration-underline">
@@ -218,24 +236,7 @@ const PersonalInformation = ({ details, updateServiceProviderStatus }) => {
               </div>
             </div>
 
-            <div className="col-md-12">
-              <div className="row justify-content-center">
-                <button
-                  type="button"
-                  className={`col-md-4 fw-medium d-flex justify-content-center align-items-center text-base 
-              ${
-                details[0]?.isVerified
-                  ? "btn-outline-danger bg-danger-400 bg-hover-danger-400"
-                  : " btn-outline-success bg-success-400 bg-hover-success-400"
-              }`}
-                  data-bs-toggle="modal"
-                  data-bs-target="#spStatus-alert-modal"
-                >
-                  {details[0]?.isVerified
-                    ? "Unverify Service Provider"
-                    : "Verify Service Provider"}
-                </button>
-              </div>
+            
               {/* <div className="row justify-content-center mt-3">
                 <button
                   type="button"

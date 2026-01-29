@@ -1,5 +1,5 @@
 import axios from "axios";
-import { REACT_APP_BASE_URL } from "./apiconfig";
+import { REACT_APP_BASE_URL } from "./apiConfig";
 import { setupInterceptors } from "./interceptors";
 
 export const API = axios.create({
@@ -117,3 +117,8 @@ export const GETSPLOCATIONDATA = (data) =>
 
 export const GIVEPAYMENTSP = (data) =>
   API.post(`/stripe/payout-sp`, data);
+
+export const GETPAYOUTSTOSP = (data) =>
+  API.post(`/stripe/fetch-payout`, data);
+export const FETCHTRANSACTIONSPWISE = (data) =>
+  API.post(`service/fetch-transactions-spwise`, data);

@@ -101,7 +101,7 @@ export default function Sidebar() {
           <Link
             to="/service-provider-list"
             className={`nav-item ${
-              location.pathname === "/service-provider-list" ? "active" : ""
+              (location.pathname === "/service-provider-list" || location.pathname.includes("service-provider-details")) ? "active" : ""
             }`}
           >
             <iconify-icon
@@ -113,7 +113,7 @@ export default function Sidebar() {
           <Link
             to="/service-request-list"
             className={`nav-item ${
-              location.pathname === "/service-request-list" ? "active" : ""
+              (location.pathname === "/service-request-list" || location.pathname.includes("service-request-details")) ? "active" : ""
             }`}
           >
             <iconify-icon
@@ -132,7 +132,7 @@ export default function Sidebar() {
               icon="foundation:dollar"
               class="menu-icon nav-icon"
             ></iconify-icon>
-            <span className="nav-text">Transaction History</span>
+            <span className="nav-text">Collection History</span>
           </Link>
           {/* <Link to="/email-template" className={`nav-item ${location.pathname === '/email-template'? 'active': ''}`}>
             <iconify-icon

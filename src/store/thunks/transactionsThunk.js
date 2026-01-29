@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { GETTRANSACTIONDATA, GIVEPAYMENTSP } from '../../api/Api'
+import { FETCHTRANSACTIONSPWISE, GETTRANSACTIONDATA, GIVEPAYMENTSP } from '../../api/Api'
 import { showToast } from '../../utils/Toast';
 
 export const transactionListThunk = createAsyncThunk(
@@ -39,6 +39,25 @@ export const makePaymentThunk = createAsyncThunk(
                 durationTime: 3500,
                 position: "top-center",
             });
+            return response.data
+        }
+        catch (error) {
+            // Handle network errors or other unexpected errors
+            if (error instanceof Error) {
+                return rejectWithValue({ message: 'Network error or unexpected issue', originalError: error?.response?.data?.message });
+            }
+        }
+
+    },
+)
+export const fetchTransationsSpWiseThunk = createAsyncThunk(
+    'transaction/fetchTransactionsSpWise',
+    async (data, { rejectWithValue }) => {
+        try {
+            const response = await FETCHTRANSACTIONSPWISE(data)
+            if (!response?.data?.status === 'success') {
+                return rejectWithValue({ message: 'Network error or unexpected issue', originalError: error?.response?.data?.message });
+            }
             return response.data
         }
         catch (error) {
