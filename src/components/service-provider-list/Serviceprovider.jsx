@@ -294,7 +294,7 @@ const Serviceprovider = () => {
                               className="icon text-xl"
                             ></iconify-icon>
                           </button>
-                          {cust?.isBanned ? (
+                          {/* {cust?.isBanned ? (
                             <button
                               type="button"
                               className="bg-success-focus bg-hover-success-200 text-success-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
@@ -313,16 +313,12 @@ const Serviceprovider = () => {
                               data-bs-toggle="modal"
                               data-bs-target={`#banSp-alert-modal-${index}`}
                             >
-                              {/* <iconify-icon
-                                icon="fluent:delete-24-regular"
-                                className="menu-icon"
-                              ></iconify-icon> */}
                               <iconify-icon
                                 icon="fluent:record-stop-48-regular"
                                 className="menu-icon"
                               ></iconify-icon>
                             </button>
-                          )}
+                          )} */}
                           <button
                             type="button"
                             className="remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle"
