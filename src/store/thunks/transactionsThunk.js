@@ -4,9 +4,9 @@ import { showToast } from '../../utils/Toast';
 
 export const transactionListThunk = createAsyncThunk(
     'transaction/transactionList',
-    async (_, { rejectWithValue }) => {
+    async (data, { rejectWithValue }) => {
         try {
-            const response = await GETTRANSACTIONDATA()
+            const response = await GETTRANSACTIONDATA(data)
             if (!response?.data?.status === 'success') {
                 return rejectWithValue({ message: 'Network error or unexpected issue', originalError: error?.response?.data?.message });
             }

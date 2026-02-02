@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { transactionListThunk } from "../../store/thunks/transactionsThunk";
 import { useDispatch } from "react-redux";
 import { CSVLink } from "react-csv";
+import Pagination from "react-js-pagination";
 
 const headers = [
   { label: "Transaction Id", key: "paymentIntentId" },
@@ -10,14 +11,30 @@ const headers = [
   { label: "Amount", key: "towing_cost" },
   { label: "Time", key: "paidAt" },
 ];
-const Transactionhistory = ({ transactionDetails, loading }) => {
+const Transactionhistory = ({
+  transactionDetails,
+  loading,
+  setQuery,
+  setperPage,
+  setpage,
+  page,
+  itemsPerpage,
+}) => {
   const dispatch = useDispatch();
   const csvref = useRef();
   const [startDownload, setStartDownload] = useState(false);
 
   const handleCsvClick = useCallback(() => {
     setStartDownload(true);
-    dispatch(transactionListThunk());
+    dispatch(
+      transactionListThunk({
+        data: {
+          query: "",
+          page: 1,
+          limit: 10000,
+        },
+      }),
+    );
   }, [dispatch]);
 
   const dataToExport = (data) => {
@@ -44,9 +61,41 @@ const Transactionhistory = ({ transactionDetails, loading }) => {
     }
   }, [transactionDetails, loading]);
 
+
   return (
     <div className="card h-100 p-0 radius-12">
+      <div className="card-header border-bottom bg-base py-16 px-24 d-flex align-items-center flex-wrap gap-3 justify-content-between">
+      </div>
       <div className="pxer">
+           <div className="d-flex align-items-center flex-wrap gap-3">
+          {/* <span className="text-md fw-medium text-secondary-light mb-0">
+            Show
+          </span> */}
+          {/* <select
+            className="form-select form-select-sm w-auto ps-12 py-6 radius-12 h-40-px"
+            onChange={(e) => setperPage(e.target.value)}
+          >
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="100">100</option>
+          </select> */}
+          <form className="navbar-search">
+            <input
+              type="text"
+              className="bg-base h-40-px w-auto"
+              name="search"
+              placeholder="Search"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <iconify-icon
+              icon="ion:search-outline"
+              className="icon"
+            ></iconify-icon>
+          </form>
+        </div>
         <div className="text-end">
           {startDownload && (
             <CSVLink
@@ -124,19 +173,19 @@ const Transactionhistory = ({ transactionDetails, loading }) => {
         {/* <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24">
           <span>
             Showing{" "}
-            {(serviceRequestList?.pagination?.page - 1) * itemsPerpage + 1} to{" "}
-            {serviceRequestList?.pagination?.page * itemsPerpage >=
-            serviceRequestList?.pagination?.total
-              ? serviceRequestList?.pagination?.total
-              : serviceRequestList?.pagination?.page * itemsPerpage}{" "}
-            of {serviceRequestList?.pagination?.total} entries
+            {(transactionDetails?.pagination?.page - 1) * itemsPerpage + 1} to{" "}
+            {transactionDetails?.pagination?.page * itemsPerpage >=
+            transactionDetails?.pagination?.total
+              ? transactionDetails?.pagination?.total
+              : transactionDetails?.pagination?.page * itemsPerpage}{" "}
+            of {transactionDetails?.pagination?.total} entries
           </span>
           <Pagination
             activePage={page}
             itemsCountPerPage={itemsPerpage}
-            totalItemsCount={serviceRequestList?.pagination?.total || 0}
+            totalItemsCount={transactionDetails?.pagination?.total || 0}
             pageRangeDisplayed={itemsPerpage}
-            onChange={handlePageChange}
+            onChange={setpage}
             itemClass="page-item"
             linkClass="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
           />

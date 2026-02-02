@@ -94,10 +94,25 @@ export const GETDASHBOARDKPIDATA = () => {
   return API.get("/auth/get-card-value");
 };
 
-export const GETTRANSACTIONDATA = () => {
-  return API.get("/service/fetch-transactions");
-};
+// export const GETTRANSACTIONDATA = () => {
+//   return API.get("service/fetch-transactions");
+// };
+export const GETTRANSACTIONDATA = (data) => {
+  // console.log(data?.data.page);
 
+  const queryString = new URLSearchParams();
+  //     // Add categoryId only if it exists
+  if (data?.data.page) {
+    queryString.append("page", String(data?.data.page));
+  }
+  if (data?.data.limit) {
+    queryString.append("limit", String(data?.data.limit));
+  }
+  if (data?.data.query) {
+    queryString.append("query", String(data?.data.query));
+  }
+  return API.get(`service/fetch-transactions?${queryString.toString()}`);
+};
 
 export const BANUNBANCUSTOMER = (data) =>
   API.post(`/auth/ban-customer`, data);

@@ -68,7 +68,7 @@ const transactionReducer = createSlice({
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(fetchTransationsSpWiseThunk.fulfilled, (state, action) => {
       // Add user to the state array
-      console.log("payload====>",action.payload);
+      // console.log("payload====>",action.payload);
       (state.spWiseTransactionData = action.payload?.data),
         (state.spwiseTransactionLoading = "success"),
         (state.spwiseTransactionError = null);
