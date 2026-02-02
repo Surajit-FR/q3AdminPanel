@@ -11,7 +11,7 @@ import ConfirmationModal from "../shared/confirmationModal/confirmationModal";
 import { CSVLink } from "react-csv";
 import { clearItems } from "../../store/reducers/serviceproviderreducer";
 import { deleteUserThunk } from "../../store/thunks/authThunk";
-import ConfirmaPayModal from "./ConfirmPayModal";
+// import ConfirmaPayModal from "./ConfirmPayModal";
 
 const headers = [
   { label: "Name", key: "name" },
@@ -31,6 +31,7 @@ const Serviceprovider = () => {
     getAllSpLoading,
     allServiceProvidersToDownload,
   } = useSelector((state) => state.serviceProvider);
+  const {isDeleateUserLoading} = useSelector((state)=>state.auth)
   const [itemsPerpage, setperPage] = useState(10);
   const [page, setpage] = useState(1);
   const [query, setquery] = useState("");
@@ -69,6 +70,7 @@ const Serviceprovider = () => {
     );
   }, [dispatch, page, itemsPerpage, query]);
 
+
   useEffect(() => {
     if (banLoading === "success") {
       dispatch(
@@ -76,12 +78,26 @@ const Serviceprovider = () => {
           data: {
             page,
             limit: itemsPerpage,
-            query,
+            query: '',
           },
         }),
       );
     }
-  }, [dispatch, page, itemsPerpage, query, banLoading]);
+  }, [dispatch, page, itemsPerpage, banLoading]);
+ 
+  useEffect(() => {
+    if (isDeleateUserLoading === "success") {
+      dispatch(
+        serviceProviderListThunk({
+          data: {
+            page,
+            limit: itemsPerpage,
+            query:'',
+          },
+        }),
+      );
+    }
+  }, [dispatch, page, itemsPerpage, isDeleateUserLoading]);
   const handleCsvClick = useCallback(() => {
     dispatch(
       getAllServiceProviderCsvThunk({

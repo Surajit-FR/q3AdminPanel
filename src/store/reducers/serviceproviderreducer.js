@@ -60,7 +60,7 @@ const serviceProviderReducer = createSlice({
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(serviceProviderDetailsThunk.fulfilled, (state, action) => {
       // Add user to the state array
-      console.log(action.payload);
+      // console.log(action.payload);
       (state.serviceProviderDetails = action.payload),
         (state.loading = "success"),
         (state.error = null);
@@ -143,7 +143,7 @@ const serviceProviderReducer = createSlice({
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(getAllPayoutsToSPThunk.fulfilled, (state, action) => {
       // Add user to the state array
-      console.log(action.payload);
+      // console.log(action.payload);
       state.allPayOuts = action.payload,
       state.getAllPayoutsLoading = 'success',
         state.getAllPayotsError = null
