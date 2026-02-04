@@ -31,7 +31,7 @@ const Serviceprovider = () => {
     getAllSpLoading,
     allServiceProvidersToDownload,
   } = useSelector((state) => state.serviceProvider);
-  const {isDeleateUserLoading} = useSelector((state)=>state.auth)
+  const { isDeleateUserLoading } = useSelector((state) => state.auth);
   const [itemsPerpage, setperPage] = useState(10);
   const [page, setpage] = useState(1);
   const [query, setquery] = useState("");
@@ -70,7 +70,6 @@ const Serviceprovider = () => {
     );
   }, [dispatch, page, itemsPerpage, query]);
 
-
   useEffect(() => {
     if (banLoading === "success") {
       dispatch(
@@ -78,13 +77,13 @@ const Serviceprovider = () => {
           data: {
             page,
             limit: itemsPerpage,
-            query: '',
+            query: "",
           },
         }),
       );
     }
   }, [dispatch, page, itemsPerpage, banLoading]);
- 
+
   useEffect(() => {
     if (isDeleateUserLoading === "success") {
       dispatch(
@@ -92,7 +91,7 @@ const Serviceprovider = () => {
           data: {
             page,
             limit: itemsPerpage,
-            query:'',
+            query: "",
           },
         }),
       );
@@ -338,94 +337,31 @@ const Serviceprovider = () => {
             </tbody>
           </table>
         </div>
-
-        <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24">
-          <span>
-            {" "}
-            Showing{" "}
-            {(serviceProviderList?.pagination?.page - 1) * itemsPerpage +
-              1} to{" "}
-            {serviceProviderList?.pagination?.page * itemsPerpage >=
-            serviceProviderList?.pagination?.total
-              ? serviceProviderList?.pagination?.total
-              : serviceProviderList?.pagination?.page * itemsPerpage}{" "}
-            of {serviceProviderList?.pagination?.total} entries
-          </span>
-          <Pagination
-            activePage={page}
-            itemsCountPerPage={itemsPerpage}
-            totalItemsCount={serviceProviderList?.pagination?.total || 0}
-            pageRangeDisplayed={itemsPerpage}
-            onChange={handlePageChange}
-            itemClass="page-item"
-            linkClass="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-          />
-          {/* <ul className="pagination d-flex flex-wrap align-items-center gap-2 justify-content-center">
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-                href="javascript:void(0)"
-              >
-                <iconify-icon
-                  icon="ep:d-arrow-left"
-                  className=""
-                ></iconify-icon>
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md bg-primary-600 text-white"
-                href="javascript:void(0)"
-              >
-                1
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px"
-                href="javascript:void(0)"
-              >
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-                href="javascript:void(0)"
-              >
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-                href="javascript:void(0)"
-              >
-                4
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-                href="javascript:void(0)"
-              >
-                5
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-                href="javascript:void(0)"
-              >
-                {" "}
-                <iconify-icon
-                  icon="ep:d-arrow-right"
-                  className=""
-                ></iconify-icon>{" "}
-              </a>
-            </li>
-          </ul> */}
-        </div>
+        {!query && (
+          <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24">
+            <span>
+              {" "}
+              Showing{" "}
+              {(serviceProviderList?.pagination?.page - 1) * itemsPerpage +
+                1}{" "}
+              to{" "}
+              {serviceProviderList?.pagination?.page * itemsPerpage >=
+              serviceProviderList?.pagination?.total
+                ? serviceProviderList?.pagination?.total
+                : serviceProviderList?.pagination?.page * itemsPerpage}{" "}
+              of {serviceProviderList?.pagination?.total} entries
+            </span>
+            <Pagination
+              activePage={page}
+              itemsCountPerPage={itemsPerpage}
+              totalItemsCount={serviceProviderList?.pagination?.total || 0}
+              pageRangeDisplayed={itemsPerpage}
+              onChange={handlePageChange}
+              itemClass="page-item"
+              linkClass="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

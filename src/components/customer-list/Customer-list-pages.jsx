@@ -304,7 +304,7 @@ const Customerlistpages = () => {
               </tbody>
             </table>
           </div>
-
+{!query && 
           <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24">
             <span>
               Showing {(customerList?.pagination?.page - 1) * itemsPerpage + 1}{" "}
@@ -325,6 +325,8 @@ const Customerlistpages = () => {
               linkClass="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
             />
           </div>
+}
+
         </div>
       </div>
     </>

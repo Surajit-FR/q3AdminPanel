@@ -286,27 +286,28 @@ const Towingrequest = () => {
             </tbody>
           </table>
         </div>
-        {/* {!query ? ( */}
-        <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24">
-          <span>
-            Showing{" "}
-            {(serviceRequestList?.pagination?.page - 1) * itemsPerpage + 1} to{" "}
-            {serviceRequestList?.pagination?.page * itemsPerpage >=
-            serviceRequestList?.pagination?.total
-              ? serviceRequestList?.pagination?.total
-              : serviceRequestList?.pagination?.page * itemsPerpage}{" "}
-            of {serviceRequestList?.pagination?.total} entries
-          </span>
-          <Pagination
-            activePage={page}
-            itemsCountPerPage={itemsPerpage}
-            totalItemsCount={serviceRequestList?.pagination?.total || 0}
-            pageRangeDisplayed={itemsPerpage}
-            onChange={handlePageChange}
-            itemClass="page-item"
-            linkClass="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
-          />
-        </div>
+        {!query && (
+          <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24">
+            <span>
+              Showing{" "}
+              {(serviceRequestList?.pagination?.page - 1) * itemsPerpage + 1} to{" "}
+              {serviceRequestList?.pagination?.page * itemsPerpage >=
+              serviceRequestList?.pagination?.total
+                ? serviceRequestList?.pagination?.total
+                : serviceRequestList?.pagination?.page * itemsPerpage}{" "}
+              of {serviceRequestList?.pagination?.total} entries
+            </span>
+            <Pagination
+              activePage={page}
+              itemsCountPerPage={itemsPerpage}
+              totalItemsCount={serviceRequestList?.pagination?.total || 0}
+              pageRangeDisplayed={itemsPerpage}
+              onChange={handlePageChange}
+              itemClass="page-item"
+              linkClass="page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
