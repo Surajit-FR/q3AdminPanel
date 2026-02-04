@@ -8,6 +8,7 @@ import Serviceproviderlist from "../pages/service-provider-list";
 import ServiceProviderDetails from "../pages/service-provider-details";
 import ServiceRequestDetails from "../pages/towing-request-details";
 import EmailTemplate from "../pages/email-template";
+import ContactUsQueries from "../pages/contactUs";
 
 const AllRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const AllRoutes = () => {
         />
         <Route path="/transactions" element={<Transactionhistorypages />} />
         <Route path="/email-template" element={<EmailTemplate />} />
+        <Route path="/customer-queries" element={<ContactUsQueries />} />
       </Routes>
     </>
   );

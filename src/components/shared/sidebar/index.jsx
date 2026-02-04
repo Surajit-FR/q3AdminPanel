@@ -134,6 +134,18 @@ export default function Sidebar() {
             ></iconify-icon>
             <span className="nav-text">Collection History</span>
           </Link>
+          <Link
+            to="/customer-queries"
+            className={`nav-item ${
+              location.pathname === "/customer-queries" ? "active" : ""
+            }`}
+          >
+            <iconify-icon
+              icon="foundation:dollar"
+              class="menu-icon nav-icon"
+            ></iconify-icon>
+            <span className="nav-text">Customer Queries</span>
+          </Link>
           {/* <Link to="/email-template" className={`nav-item ${location.pathname === '/email-template'? 'active': ''}`}>
             <iconify-icon
               icon="foundation:mail"

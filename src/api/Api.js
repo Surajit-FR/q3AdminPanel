@@ -137,3 +137,7 @@ export const GETPAYOUTSTOSP = (data) =>
   API.post(`/stripe/fetch-payout`, data);
 export const FETCHTRANSACTIONSPWISE = (data) =>
   API.post(`service/fetch-transactions-spwise`, data);
+
+export const GETALLCUSTOMERQUERIES = () => {
+  return API.get("/contact-us/fetch-queries");
+};
